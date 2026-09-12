@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Campus Skill Exchange | TECHNO INDIA UNIVERSITY</title>
+    <title>Campus Skill Exchange</title>
 
     <style>
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -41,49 +40,64 @@
             font-size: 10px;
             letter-spacing: 2px;
             margin-top: 5px;
-            opacity: 0.9;
         }
 
-        nav span {
-            font-size: 14px;
+        .role-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .role-buttons button {
+            width: auto;
+            margin: 0;
+            padding: 10px 18px;
+            background: white;
+            color: #6c3ce9;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .role-buttons button.active {
+            background: #24104f;
+            color: white;
         }
 
         /* HERO */
 
         .hero {
             text-align: center;
-            padding: 55px 20px 40px;
+            padding: 50px 20px;
             background: linear-gradient(135deg, #6c3ce9, #9b65ff);
             color: white;
         }
 
         .hero h1 {
-            font-size: 42px;
+            font-size: 40px;
             margin-bottom: 10px;
         }
 
         .hero h3 {
+            font-size: 14px;
             letter-spacing: 3px;
-            font-size: 15px;
             margin-bottom: 12px;
         }
 
         .hero p {
-            font-size: 18px;
+            font-size: 17px;
             margin-bottom: 25px;
         }
 
         .search {
             width: 90%;
             max-width: 600px;
-            padding: 16px 20px;
+            padding: 15px 20px;
             border: none;
             border-radius: 30px;
             font-size: 16px;
             outline: none;
         }
 
-        /* CONTAINER */
+        /* MAIN */
 
         .container {
             width: 86%;
@@ -95,57 +109,19 @@
             margin-bottom: 18px;
         }
 
-        /* BOX */
-
         .box {
             background: white;
             padding: 25px;
             border-radius: 18px;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
-        }
-
-        /* PROFILE */
-
-        .profile-box input {
-            width: 100%;
-            padding: 13px;
-            margin: 8px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-
-        /* SKILLS */
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 35px;
-        }
-
-        .skill {
-            background: white;
-            padding: 12px 20px;
-            border-radius: 25px;
-            border: 1px solid #ddd;
-            cursor: pointer;
-        }
-
-        .skill:hover {
-            background: #6c3ce9;
-            color: white;
         }
 
         /* MENTOR CARDS */
 
         .cards {
             display: grid;
-            grid-template-columns: repeat(
-                auto-fit,
-                minmax(260px, 1fr)
-            );
-
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 22px;
         }
 
@@ -161,53 +137,43 @@
             height: 55px;
             background: #eee5ff;
             border-radius: 50%;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             font-size: 25px;
             margin-bottom: 15px;
         }
 
         .card h3 {
-            margin-bottom: 7px;
+            margin-bottom: 8px;
         }
 
         .card p {
             color: #666;
-            margin: 7px 0;
+            margin: 8px 0;
         }
 
         .tag {
             display: inline-block;
             background: #eee5ff;
             color: #6c3ce9;
-
             padding: 5px 10px;
-
             border-radius: 12px;
-
             font-size: 12px;
-
-            margin: 5px 3px 12px 0;
+            margin: 5px 3px;
         }
 
-        /* BUTTONS */
+        /* BUTTON */
 
         button {
             width: 100%;
             padding: 11px;
-
             border: none;
             border-radius: 10px;
-
             background: #6c3ce9;
             color: white;
-
             font-size: 15px;
             cursor: pointer;
-
             margin-top: 8px;
         }
 
@@ -219,44 +185,31 @@
             background: #159447;
         }
 
-        .accept:hover {
-            background: #0e7336;
+        .reject {
+            background: #d64545;
         }
 
         .complete {
             background: #e58a00;
         }
 
-        .complete:hover {
-            background: #bd7100;
-        }
-
         /* REQUEST */
 
         .request-card {
             background: #f8f6ff;
-
             border: 1px solid #e4ddff;
-
             padding: 18px;
-
             border-radius: 12px;
-
             margin-top: 12px;
         }
 
         .status {
             display: inline-block;
-
             padding: 5px 10px;
-
             border-radius: 12px;
-
             background: #fff3cd;
             color: #856404;
-
             font-size: 12px;
-
             margin-top: 8px;
         }
 
@@ -274,55 +227,37 @@
 
         .certificate {
             background: #fffdf0;
-
             border: 2px solid #e8c84a;
-
             text-align: center;
-
             padding: 30px;
-
             border-radius: 18px;
-
             margin-top: 15px;
         }
 
         .certificate-university {
             font-size: 13px;
-
             letter-spacing: 3px;
-
             color: #6c3ce9;
-
             font-weight: bold;
-
             margin-bottom: 12px;
         }
 
         .certificate-icon {
             font-size: 55px;
-
             margin-bottom: 12px;
         }
 
         .certificate h2 {
             color: #8a6800;
-
             margin-bottom: 12px;
-        }
-
-        .certificate h3 {
-            margin: 12px 0;
         }
 
         /* MESSAGE */
 
         #message {
             text-align: center;
-
-            margin: 25px 0;
-
+            margin: 20px 0;
             font-weight: bold;
-
             color: #6c3ce9;
         }
 
@@ -330,10 +265,22 @@
 
         footer {
             text-align: center;
-
             padding: 30px;
-
             color: #777;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .role-label {
+            background: #eee5ff;
+            color: #6c3ce9;
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            font-weight: bold;
         }
 
     </style>
@@ -344,883 +291,945 @@
 <body>
 
 
-    <!-- ================= NAVBAR ================= -->
+<!-- ================= NAVBAR ================= -->
 
-    <nav>
+<nav>
 
-        <div>
+    <div>
 
-            <h2>
-                🎓 Campus Skill Exchange
-            </h2>
+        <h2>🎓 Campus Skill Exchange</h2>
 
-            <small class="university">
-                TECHNO INDIA UNIVERSITY
-            </small>
-
-        </div>
-
-        <span>
-            Learn • Share • Grow
-        </span>
-
-    </nav>
-
-
-    <!-- ================= HERO ================= -->
-
-    <section class="hero">
-
-        <h3>
+        <small class="university">
             TECHNO INDIA UNIVERSITY
-        </h3>
-
-        <h1>
-            Learn From Your Campus
-        </h1>
-
-        <p>
-            Connect with seniors. Learn skills. Grow together.
-        </p>
-
-        <input
-            type="text"
-            id="search"
-            class="search"
-            placeholder="🔍 Search Python, C++, AI/ML..."
-            onkeyup="searchSeniors()"
-        >
-
-    </section>
-
-
-    <div class="container">
-
-
-        <!-- ================= CREATE PROFILE ================= -->
-
-        <div class="box profile-box">
-
-            <h2>
-                👤 Create Mentor Profile
-            </h2>
-
-            <br>
-
-            <input
-                id="name"
-                placeholder="Your Name"
-            >
-
-            <input
-                id="skills"
-                placeholder="Skills: Python, AI/ML"
-            >
-
-            <input
-                id="experience"
-                placeholder="Experience: 2 years"
-            >
-
-            <button onclick="createProfile()">
-
-                Create Mentor Profile
-
-            </button>
-
-        </div>
-
-
-        <!-- ================= SKILLS ================= -->
-
-        <h2 class="section-title">
-            Explore Skills
-        </h2>
-
-        <div class="skills">
-
-            <div
-                class="skill"
-                onclick="filterSkill('Python')">
-
-                🐍 Python
-
-            </div>
-
-            <div
-                class="skill"
-                onclick="filterSkill('C++')">
-
-                💻 C++
-
-            </div>
-
-            <div
-                class="skill"
-                onclick="filterSkill('Java')">
-
-                ☕ Java
-
-            </div>
-
-            <div
-                class="skill"
-                onclick="filterSkill('AI/ML')">
-
-                🤖 AI/ML
-
-            </div>
-
-            <div
-                class="skill"
-                onclick="filterSkill('Web Development')">
-
-                🌐 Web Development
-
-            </div>
-
-        </div>
-
-
-        <!-- ================= MENTORS ================= -->
-
-        <h2 class="section-title">
-
-            Available Mentors
-
-        </h2>
-
-        <div
-            class="cards"
-            id="mentorCards">
-        </div>
-
-
-        <!-- MESSAGE -->
-
-        <div id="message"></div>
-
-
-        <!-- ================= REQUESTS ================= -->
-
-        <div class="box">
-
-            <h2>
-                📩 Connection Requests
-            </h2>
-
-            <p
-                style="
-                margin-top:8px;
-                color:#666;
-                "
-            >
-                Track mentoring requests and learning sessions.
-            </p>
-
-            <div id="requestsList">
-
-                Loading requests...
-
-            </div>
-
-        </div>
-
-
-        <!-- ================= CERTIFICATES ================= -->
-
-        <div class="box">
-
-            <h2>
-                🏆 Mentor Recognition
-            </h2>
-
-            <p
-                style="
-                margin-top:8px;
-                color:#666;
-                "
-            >
-                Certificates and contribution badges.
-            </p>
-
-            <div
-                id="certificatesList"
-                style="margin-top:15px;"
-            >
-
-                No certificates yet.
-
-            </div>
-
-        </div>
-
+        </small>
 
     </div>
 
 
-    <!-- ================= FOOTER ================= -->
+    <div class="role-buttons">
 
-    <footer>
+        <button
+            id="juniorBtn"
+            class="active"
+            onclick="showJunior()">
 
-        <strong>
-            TECHNO INDIA UNIVERSITY
-        </strong>
+            👨‍🎓 Junior
 
-        <br>
+        </button>
 
-        Campus Skill Exchange
 
-        <br><br>
+        <button
+            id="mentorBtn"
+            onclick="showMentor()">
 
-        Learn from your campus,
-        grow with your campus 💜
+            👨‍🏫 Mentor
 
-    </footer>
+        </button>
 
+    </div>
 
-    <script>
+</nav>
 
 
-        // =========================
-        // LOAD MENTORS
-        // =========================
 
-        async function loadMentors() {
+<!-- ================= HERO ================= -->
 
-            const response =
-                await fetch("/api/mentors");
+<section class="hero">
 
-            const mentors =
-                await response.json();
+    <h3>TECHNO INDIA UNIVERSITY</h3>
 
-            displayMentors(mentors);
+    <h1 id="heroTitle">
+        Learn From Your Campus
+    </h1>
 
-        }
+    <p id="heroText">
+        Connect with skilled seniors and learn together.
+    </p>
 
 
-        // =========================
-        // DISPLAY MENTORS
-        // =========================
+    <input
+        id="search"
+        class="search"
+        placeholder="🔍 Search Python, C++, AI/ML..."
+        onkeyup="searchMentors()"
+    >
 
-        function displayMentors(mentors) {
+</section>
 
-            const container =
-                document.getElementById(
-                    "mentorCards"
-                );
 
-            container.innerHTML = "";
 
+<div class="container">
 
-            if (mentors.length === 0) {
 
-                container.innerHTML =
-                    "<p>No mentors found.</p>";
+<!-- ================= JUNIOR DASHBOARD ================= -->
 
-                return;
-            }
+<div id="juniorDashboard">
 
 
-            mentors.forEach(mentor => {
+    <div class="role-label">
+        👨‍🎓 Junior Dashboard
+    </div>
 
-                const card =
-                    document.createElement("div");
 
-                card.className = "card";
+    <h2 class="section-title">
+        🔍 Find a Mentor
+    </h2>
 
 
-                const skillsHTML =
-                    mentor.skills
-                    .map(
-                        skill =>
-                        `<span class="tag">
-                            ${skill}
-                        </span>`
-                    )
-                    .join("");
+    <div
+        class="cards"
+        id="mentorCards">
 
+    </div>
 
-                card.innerHTML = `
 
-                    <div class="avatar">
-                        👨‍💻
-                    </div>
+    <div id="message"></div>
 
-                    <h3>
-                        ${mentor.name}
-                    </h3>
 
-                    <p>
-                        ⭐ ${mentor.rating}
-                    </p>
+    <div class="box">
 
-                    <div>
-                        ${skillsHTML}
-                    </div>
+        <h2>
+            📤 My Connection Requests
+        </h2>
 
-                    <p>
-                        💼 ${mentor.experience}
-                    </p>
+        <p style="margin-top:8px;color:#666;">
 
-                    <p>
-                        ${
-                            mentor.available
-                            ? "🟢 Available for mentoring"
-                            : "🔴 Currently unavailable"
-                        }
-                    </p>
+            Track the mentors you have contacted.
 
-                    <button
-                        onclick="connect(${mentor.id})">
+        </p>
 
-                        🔗 Connect
 
-                    </button>
+        <div id="juniorRequests">
 
-                `;
+            Loading...
 
+        </div>
 
-                container.appendChild(card);
+    </div>
 
-            });
+</div>
 
-        }
 
 
-        // =========================
-        // SEARCH
-        // =========================
+<!-- ================= MENTOR DASHBOARD ================= -->
 
-        async function searchSeniors() {
+<div
+    id="mentorDashboard"
+    class="hidden">
 
-            const skill =
-                document
-                .getElementById("search")
-                .value;
 
+    <div class="role-label">
+        👨‍🏫 Mentor Dashboard
+    </div>
 
-            if (skill.trim() === "") {
 
-                loadMentors();
+    <div class="box">
 
-                return;
-            }
+        <h2>
+            📩 Incoming Requests
+        </h2>
 
+        <p style="margin-top:8px;color:#666;">
 
-            const response =
-                await fetch(
-                    "/api/mentors/search?skill="
-                    + encodeURIComponent(skill)
-                );
+            Requests from juniors who want to learn from you.
 
+        </p>
 
-            const mentors =
-                await response.json();
 
+        <div id="mentorRequests">
 
-            displayMentors(mentors);
+            Loading...
 
-        }
+        </div>
 
+    </div>
 
-        // =========================
-        // FILTER
-        // =========================
 
-        function filterSkill(skill) {
+    <div class="box">
 
-            document
-                .getElementById("search")
-                .value = skill;
+        <h2>
+            🏆 My Contribution
+        </h2>
 
-            searchSeniors();
 
-        }
+        <p style="margin-top:8px;color:#666;">
 
+            Complete mentoring sessions to receive recognition.
 
-        // =========================
-        // CONNECT
-        // =========================
+        </p>
 
-        async function connect(id) {
 
-            const response =
-                await fetch(
-                    "/api/connect",
-                    {
+        <div id="certificatesList">
 
-                        method: "POST",
+            No certificates yet.
 
-                        headers: {
-                            "Content-Type":
-                            "application/json"
-                        },
+        </div>
 
-                        body: JSON.stringify({
+    </div>
 
-                            mentor_id: id,
+</div>
 
-                            junior_name:
-                                "Campus Junior"
 
-                        })
+</div>
 
-                    }
-                );
 
 
-            const result =
-                await response.json();
+<!-- ================= FOOTER ================= -->
 
+<footer>
 
-            document
-                .getElementById("message")
-                .innerText =
-                "✅ " + result.message;
+    <strong>
+        TECHNO INDIA UNIVERSITY
+    </strong>
 
+    <br><br>
 
-            loadRequests();
+    Campus Skill Exchange
 
-        }
+    <br>
 
+    Learn from your campus,
+    grow with your campus 💜
 
-        // =========================
-        // CREATE PROFILE
-        // =========================
+</footer>
 
-        async function createProfile() {
 
-            const name =
-                document
-                .getElementById("name")
-                .value;
 
+<script>
 
-            const skillsText =
-                document
-                .getElementById("skills")
-                .value;
 
+// =====================================================
+// JUNIOR / MENTOR SWITCH
+// =====================================================
 
-            const experience =
-                document
-                .getElementById("experience")
-                .value;
 
+function showJunior() {
 
-            if (
-                name.trim() === "" ||
-                skillsText.trim() === ""
-            ) {
+    document
+        .getElementById("juniorDashboard")
+        .classList.remove("hidden");
 
-                alert(
-                    "Please enter your name and skills."
-                );
 
-                return;
-            }
+    document
+        .getElementById("mentorDashboard")
+        .classList.add("hidden");
 
 
-            const skills =
-                skillsText
-                .split(",")
-                .map(
-                    skill =>
-                    skill.trim()
-                );
+    document
+        .getElementById("juniorBtn")
+        .classList.add("active");
 
 
-            const response =
-                await fetch(
-                    "/api/profile",
-                    {
+    document
+        .getElementById("mentorBtn")
+        .classList.remove("active");
 
-                        method: "POST",
 
-                        headers: {
-                            "Content-Type":
-                            "application/json"
-                        },
+    document
+        .getElementById("heroTitle")
+        .innerText =
+        "Learn From Your Campus";
 
-                        body: JSON.stringify({
 
-                            name: name,
+    document
+        .getElementById("heroText")
+        .innerText =
+        "Connect with skilled seniors and learn together.";
 
-                            skills: skills,
+}
 
-                            experience:
-                                experience
 
-                        })
 
-                    }
-                );
+function showMentor() {
 
+    document
+        .getElementById("juniorDashboard")
+        .classList.add("hidden");
 
-            const result =
-                await response.json();
 
+    document
+        .getElementById("mentorDashboard")
+        .classList.remove("hidden");
 
-            document
-                .getElementById("message")
-                .innerText =
-                "🎉 " + result.message;
 
+    document
+        .getElementById("juniorBtn")
+        .classList.remove("active");
 
-            document
-                .getElementById("name")
-                .value = "";
 
-            document
-                .getElementById("skills")
-                .value = "";
+    document
+        .getElementById("mentorBtn")
+        .classList.add("active");
 
-            document
-                .getElementById("experience")
-                .value = "";
 
+    document
+        .getElementById("heroTitle")
+        .innerText =
+        "Guide the Next Generation";
 
-            loadMentors();
 
-        }
+    document
+        .getElementById("heroText")
+        .innerText =
+        "Share your skills and help juniors grow.";
 
+    
+    loadMentorRequests();
 
-        // =========================
-        // LOAD REQUESTS
-        // =========================
+    loadCertificates();
 
-        async function loadRequests() {
+}
 
-            const response =
-                await fetch(
-                    "/api/requests"
-                );
 
 
-            const requests =
-                await response.json();
+// =====================================================
+// LOAD MENTORS
+// =====================================================
 
 
-            const container =
-                document
-                .getElementById(
-                    "requestsList"
-                );
+async function loadMentors() {
 
+    const response =
+        await fetch("/api/mentors");
 
-            container.innerHTML = "";
 
+    const mentors =
+        await response.json();
 
-            if (requests.length === 0) {
 
-                container.innerHTML =
-                    "<p style='margin-top:15px;color:#777;'>No connection requests yet.</p>";
+    displayMentors(mentors);
 
-                return;
-            }
+}
 
 
-            requests.forEach(req => {
 
-                const div =
-                    document.createElement(
-                        "div"
-                    );
+// =====================================================
+// DISPLAY MENTORS
+// =====================================================
 
-                div.className =
-                    "request-card";
 
+function displayMentors(mentors) {
 
-                let statusClass = "";
+    const container =
+        document.getElementById(
+            "mentorCards"
+        );
 
 
-                if (
-                    req.status === "Accepted"
-                ) {
+    container.innerHTML = "";
 
-                    statusClass =
-                        "accepted-status";
 
+    if (mentors.length === 0) {
+
+        container.innerHTML =
+            "<p>No mentors found.</p>";
+
+        return;
+
+    }
+
+
+    mentors.forEach(mentor => {
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className = "card";
+
+
+        const skillsHTML =
+            mentor.skills
+            .map(
+                skill =>
+                `<span class="tag">${skill}</span>`
+            )
+            .join("");
+
+
+        card.innerHTML = `
+
+            <div class="avatar">
+                👨‍💻
+            </div>
+
+            <h3>
+                ${mentor.name}
+            </h3>
+
+            <p>
+                ⭐ ${mentor.rating}
+            </p>
+
+            <div>
+                ${skillsHTML}
+            </div>
+
+            <p>
+                💼 ${mentor.experience}
+            </p>
+
+            <p>
+                ${
+                    mentor.available
+                    ? "🟢 Available"
+                    : "🔴 Unavailable"
                 }
+            </p>
 
+            <button
+                onclick="connect(${mentor.id})">
 
-                if (
-                    req.status === "Completed"
-                ) {
+                🔗 Send Connection Request
 
-                    statusClass =
-                        "completed-status";
+            </button>
 
-                }
+        `;
 
 
-                div.innerHTML = `
+        container.appendChild(card);
 
-                    <strong>
-                        👤 ${req.junior_name}
-                    </strong>
+    });
 
-                    <p>
-                        wants to learn from
-                        <strong>
-                            ${req.mentor_name}
-                        </strong>
-                    </p>
+}
 
-                    <span
-                        class="status ${statusClass}">
 
-                        ${req.status}
 
-                    </span>
+// =====================================================
+// SEARCH
+// =====================================================
 
-                    ${
-                        req.status === "Pending"
-                        ?
-                        `
-                        <button
-                            class="accept"
-                            onclick="acceptRequest(${req.id})">
 
-                            ✅ Accept Request
+async function searchMentors() {
 
-                        </button>
-                        `
-                        :
-                        ""
-                    }
+    const skill =
+        document
+        .getElementById("search")
+        .value;
 
 
-                    ${
-                        req.status === "Accepted"
-                        ?
-                        `
-                        <button
-                            class="complete"
-                            onclick="completeSession(${req.id})">
-
-                            🎓 Complete Session
-
-                        </button>
-                        `
-                        :
-                        ""
-                    }
-
-
-                    ${
-                        req.status === "Completed"
-                        ?
-                        `
-                        <p
-                            style="
-                            color:#0c5460;
-                            margin-top:12px;
-                            ">
-
-                            🏆 Session completed
-                            and badge generated!
-
-                        </p>
-                        `
-                        :
-                        ""
-                    }
-
-                `;
-
-
-                container.appendChild(div);
-
-            });
-
-        }
-
-
-        // =========================
-        // ACCEPT REQUEST
-        // =========================
-
-        async function acceptRequest(id) {
-
-            const response =
-                await fetch(
-                    `/api/requests/${id}/accept`,
-                    {
-                        method: "POST"
-                    }
-                );
-
-
-            const result =
-                await response.json();
-
-
-            document
-                .getElementById("message")
-                .innerText =
-                "🤝 " + result.message;
-
-
-            loadRequests();
-
-        }
-
-
-        // =========================
-        // COMPLETE SESSION
-        // =========================
-
-        async function completeSession(id) {
-
-            const response =
-                await fetch(
-                    `/api/requests/${id}/complete`,
-                    {
-                        method: "POST"
-                    }
-                );
-
-
-            const result =
-                await response.json();
-
-
-            document
-                .getElementById("message")
-                .innerText =
-                "🏆 " + result.message;
-
-
-            loadRequests();
-
-            loadCertificates();
-
-        }
-
-
-        // =========================
-        // LOAD CERTIFICATES
-        // =========================
-
-        async function loadCertificates() {
-
-            const response =
-                await fetch(
-                    "/api/certificates"
-                );
-
-
-            const certificates =
-                await response.json();
-
-
-            const container =
-                document
-                .getElementById(
-                    "certificatesList"
-                );
-
-
-            container.innerHTML = "";
-
-
-            if (
-                certificates.length === 0
-            ) {
-
-                container.innerHTML =
-                    "No certificates yet.";
-
-                return;
-            }
-
-
-            certificates.forEach(cert => {
-
-                const div =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                div.className =
-                    "certificate";
-
-
-                div.innerHTML = `
-
-                    <div
-                        class="certificate-university">
-
-                        TECHNO INDIA UNIVERSITY
-
-                    </div>
-
-                    <div
-                        class="certificate-icon">
-
-                        🏆
-
-                    </div>
-
-                    <h2>
-                        Mentor Contribution Certificate
-                    </h2>
-
-                    <p>
-                        This recognition is awarded to
-                    </p>
-
-                    <h3>
-                        ${cert.mentor_name}
-                    </h3>
-
-                    <p>
-                        for mentoring
-                        <strong>
-                            ${cert.junior_name}
-                        </strong>
-                    </p>
-
-                    <p style="margin-top:12px;">
-
-                        Skill:
-                        <strong>
-                            ${cert.skill}
-                        </strong>
-
-                    </p>
-
-                    <p style="margin-top:15px;color:#666;">
-
-                        Campus Skill Exchange
-
-                    </p>
-
-                `;
-
-
-                container.appendChild(div);
-
-            });
-
-        }
-
-
-        // =========================
-        // START
-        // =========================
+    if (skill.trim() === "") {
 
         loadMentors();
 
-        loadRequests();
+        return;
 
-        loadCertificates();
+    }
 
 
-    </script>
+    const response =
+        await fetch(
+            "/api/mentors/search?skill="
+            +
+            encodeURIComponent(skill)
+        );
+
+
+    const mentors =
+        await response.json();
+
+
+    displayMentors(mentors);
+
+}
+
+
+
+// =====================================================
+// CONNECT
+// =====================================================
+
+
+async function connect(id) {
+
+
+    const response =
+        await fetch(
+            "/api/connect",
+            {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                    "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    mentor_id: id,
+
+                    junior_name:
+                        "Anwesha Bhattacharjee"
+
+                })
+
+            }
+        );
+
+
+    const result =
+        await response.json();
+
+
+    document
+        .getElementById("message")
+        .innerText =
+        "✅ " + result.message;
+
+
+    loadJuniorRequests();
+
+}
+
+
+
+// =====================================================
+// JUNIOR REQUESTS
+// =====================================================
+
+
+async function loadJuniorRequests() {
+
+
+    const response =
+        await fetch(
+            "/api/requests"
+        );
+
+
+    const requests =
+        await response.json();
+
+
+    const container =
+        document.getElementById(
+            "juniorRequests"
+        );
+
+
+    container.innerHTML = "";
+
+
+    if (requests.length === 0) {
+
+        container.innerHTML =
+            "<p style='margin-top:15px;color:#777;'>No requests yet.</p>";
+
+        return;
+
+    }
+
+
+    requests.forEach(req => {
+
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.className =
+            "request-card";
+
+
+        let statusClass = "";
+
+
+        if (
+            req.status === "Accepted"
+        ) {
+
+            statusClass =
+                "accepted-status";
+
+        }
+
+
+        if (
+            req.status === "Completed"
+        ) {
+
+            statusClass =
+                "completed-status";
+
+        }
+
+
+        div.innerHTML = `
+
+            <strong>
+                👨‍🏫 ${req.mentor_name}
+            </strong>
+
+            <p>
+                Your mentoring request
+            </p>
+
+            <span class="status ${statusClass}">
+                ${req.status}
+            </span>
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+
+// =====================================================
+// MENTOR REQUESTS
+// =====================================================
+
+
+async function loadMentorRequests() {
+
+
+    const response =
+        await fetch(
+            "/api/requests"
+        );
+
+
+    const requests =
+        await response.json();
+
+
+    const container =
+        document.getElementById(
+            "mentorRequests"
+        );
+
+
+    container.innerHTML = "";
+
+
+    if (requests.length === 0) {
+
+        container.innerHTML =
+            "<p style='margin-top:15px;color:#777;'>No incoming requests.</p>";
+
+        return;
+
+    }
+
+
+    requests.forEach(req => {
+
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.className =
+            "request-card";
+
+
+        let statusClass = "";
+
+
+        if (
+            req.status === "Accepted"
+        ) {
+
+            statusClass =
+                "accepted-status";
+
+        }
+
+
+        if (
+            req.status === "Completed"
+        ) {
+
+            statusClass =
+                "completed-status";
+
+        }
+
+
+        div.innerHTML = `
+
+            <strong>
+                👨‍🎓 ${req.junior_name}
+            </strong>
+
+            <p>
+                wants to learn from
+                <strong>
+                    ${req.mentor_name}
+                </strong>
+            </p>
+
+            <span class="status ${statusClass}">
+                ${req.status}
+            </span>
+
+
+            ${
+                req.status === "Pending"
+                ?
+                `
+                <button
+                    class="accept"
+                    onclick="acceptRequest(${req.id})">
+
+                    ✅ Accept Request
+
+                </button>
+                `
+                :
+                ""
+            }
+
+
+            ${
+                req.status === "Accepted"
+                ?
+                `
+                <button
+                    class="complete"
+                    onclick="completeSession(${req.id})">
+
+                    🎓 Complete Session
+
+                </button>
+                `
+                :
+                ""
+            }
+
+
+            ${
+                req.status === "Completed"
+                ?
+                `
+                <p style="margin-top:12px;color:#0c5460;">
+
+                    🏆 Mentoring session completed!
+
+                </p>
+                `
+                :
+                ""
+            }
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+
+// =====================================================
+// ACCEPT
+// =====================================================
+
+
+async function acceptRequest(id) {
+
+
+    const response =
+        await fetch(
+            `/api/requests/${id}/accept`,
+            {
+                method: "POST"
+            }
+        );
+
+
+    const result =
+        await response.json();
+
+
+    alert(
+        "✅ " + result.message
+    );
+
+
+    loadMentorRequests();
+
+}
+
+
+
+// =====================================================
+// COMPLETE SESSION
+// =====================================================
+
+
+async function completeSession(id) {
+
+
+    const response =
+        await fetch(
+            `/api/requests/${id}/complete`,
+            {
+                method: "POST"
+            }
+        );
+
+
+    const result =
+        await response.json();
+
+
+    alert(
+        "🏆 " + result.message
+    );
+
+
+    loadMentorRequests();
+
+    loadCertificates();
+
+}
+
+
+
+// =====================================================
+// CERTIFICATES
+// =====================================================
+
+
+async function loadCertificates() {
+
+
+    const response =
+        await fetch(
+            "/api/certificates"
+        );
+
+
+    const certificates =
+        await response.json();
+
+
+    const container =
+        document.getElementById(
+            "certificatesList"
+        );
+
+
+    container.innerHTML = "";
+
+
+    if (
+        certificates.length === 0
+    ) {
+
+        container.innerHTML =
+            "No certificates yet.";
+
+        return;
+
+    }
+
+
+    certificates.forEach(cert => {
+
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.className =
+            "certificate";
+
+
+        div.innerHTML = `
+
+            <div class="certificate-university">
+
+                TECHNO INDIA UNIVERSITY
+
+            </div>
+
+
+            <div class="certificate-icon">
+
+                🏆
+
+            </div>
+
+
+            <h2>
+                Mentor Contribution Certificate
+            </h2>
+
+
+            <p>
+                This recognition is awarded to
+            </p>
+
+
+            <h3>
+                ${cert.mentor_name}
+            </h3>
+
+
+            <p>
+                for mentoring
+                <strong>
+                    ${cert.junior_name}
+                </strong>
+            </p>
+
+
+            <p style="margin-top:12px;">
+
+                Skill:
+                <strong>
+                    ${cert.skill}
+                </strong>
+
+            </p>
+
+
+            <p style="margin-top:15px;color:#666;">
+
+                Campus Skill Exchange
+
+            </p>
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+
+// =====================================================
+// START
+// =====================================================
+
+
+loadMentors();
+
+loadJuniorRequests();
+
+loadCertificates();
+
+
+</script>
 
 
 </body>

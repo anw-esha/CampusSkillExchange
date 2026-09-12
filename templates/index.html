@@ -1,338 +1,472 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Campus Skill Exchange</title>
+<title>Campus Skill Exchange | TIU</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
 
-        body {
-            background: #f5f3ff;
-            color: #222;
-        }
+body{
+    background:#070707;
+    color:#f5f5f5;
+    min-height:100vh;
+}
 
-        /* NAVBAR */
+/* Background animation */
+body::before{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:rgba(130,60,255,.10);
+    filter:blur(100px);
+    top:-150px;
+    left:-150px;
+    animation:float 7s ease-in-out infinite alternate;
+    pointer-events:none;
+}
 
-        nav {
-            background: #6c3ce9;
-            color: white;
-            padding: 18px 7%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+body::after{
+    content:"";
+    position:fixed;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:rgba(255,30,100,.07);
+    filter:blur(110px);
+    right:-150px;
+    bottom:-150px;
+    animation:float2 9s ease-in-out infinite alternate;
+    pointer-events:none;
+}
 
-        nav h2 {
-            font-size: 22px;
-        }
+@keyframes float{
+    from{transform:translate(0,0);}
+    to{transform:translate(80px,60px);}
+}
 
-        .university {
-            display: block;
-            font-size: 10px;
-            letter-spacing: 2px;
-            margin-top: 5px;
-        }
+@keyframes float2{
+    from{transform:translate(0,0);}
+    to{transform:translate(-70px,-50px);}
+}
 
-        .role-buttons {
-            display: flex;
-            gap: 10px;
-        }
+/* Navbar */
 
-        .role-buttons button {
-            width: auto;
-            margin: 0;
-            padding: 10px 18px;
-            background: white;
-            color: #6c3ce9;
-            border-radius: 20px;
-            font-weight: bold;
-        }
+nav{
+    position:relative;
+    z-index:2;
+    background:rgba(10,10,10,.9);
+    border-bottom:1px solid #222;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    backdrop-filter:blur(12px);
+}
 
-        .role-buttons button.active {
-            background: #24104f;
-            color: white;
-        }
+nav h2{
+    font-size:21px;
+}
 
-        /* HERO */
+.university{
+    display:block;
+    color:#b98cff;
+    font-size:10px;
+    letter-spacing:3px;
+    margin-top:5px;
+}
 
-        .hero {
-            text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(135deg, #6c3ce9, #9b65ff);
-            color: white;
-        }
+.role-buttons{
+    display:flex;
+    gap:8px;
+}
 
-        .hero h1 {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
+.role-buttons button{
+    width:auto;
+    margin:0;
+    padding:9px 17px;
+    border-radius:20px;
+    background:#151515;
+    color:#ddd;
+    border:1px solid #333;
+}
 
-        .hero h3 {
-            font-size: 14px;
-            letter-spacing: 3px;
-            margin-bottom: 12px;
-        }
+.role-buttons button.active{
+    background:#7c3cff;
+    color:white;
+    border-color:#9b65ff;
+}
 
-        .hero p {
-            font-size: 17px;
-            margin-bottom: 25px;
-        }
+/* Hero */
 
-        .search {
-            width: 90%;
-            max-width: 600px;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 30px;
-            font-size: 16px;
-            outline: none;
-        }
+.hero{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    padding:75px 20px 65px;
+    background:
+        radial-gradient(circle at center,
+        rgba(124,60,255,.18),
+        transparent 55%);
+}
 
-        /* MAIN */
+.hero h3{
+    color:#a875ff;
+    letter-spacing:5px;
+    font-size:12px;
+    margin-bottom:15px;
+}
 
-        .container {
-            width: 86%;
-            max-width: 1100px;
-            margin: 35px auto;
-        }
+.hero h1{
+    font-size:44px;
+    margin-bottom:14px;
+    animation:fadeDown .8s ease;
+}
 
-        .section-title {
-            margin-bottom: 18px;
-        }
+.hero p{
+    color:#aaa;
+    margin-bottom:28px;
+    animation:fadeUp 1s ease;
+}
 
-        .box {
-            background: white;
-            padding: 25px;
-            border-radius: 18px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
-        }
+@keyframes fadeDown{
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 
-        /* MENTOR CARDS */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 22px;
-        }
+.search{
+    width:90%;
+    max-width:600px;
+    padding:16px 22px;
+    background:#111;
+    color:white;
+    border:1px solid #333;
+    border-radius:30px;
+    outline:none;
+    transition:.3s;
+}
 
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 18px;
-            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
-        }
+.search:focus{
+    border-color:#8b5cf6;
+    box-shadow:0 0 20px rgba(139,92,246,.2);
+}
 
-        .avatar {
-            width: 55px;
-            height: 55px;
-            background: #eee5ff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 25px;
-            margin-bottom: 15px;
-        }
+/* Main */
 
-        .card h3 {
-            margin-bottom: 8px;
-        }
+.container{
+    position:relative;
+    z-index:1;
+    width:86%;
+    max-width:1100px;
+    margin:30px auto;
+}
 
-        .card p {
-            color: #666;
-            margin: 8px 0;
-        }
+.role-label{
+    display:inline-block;
+    background:#151515;
+    border:1px solid #333;
+    color:#b98cff;
+    padding:8px 15px;
+    border-radius:20px;
+    margin-bottom:20px;
+    font-weight:bold;
+}
 
-        .tag {
-            display: inline-block;
-            background: #eee5ff;
-            color: #6c3ce9;
-            padding: 5px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            margin: 5px 3px;
-        }
+.section-title{
+    margin-bottom:20px;
+}
 
-        /* BUTTON */
+.box{
+    background:rgba(17,17,17,.85);
+    border:1px solid #292929;
+    padding:25px;
+    border-radius:18px;
+    margin-bottom:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
 
-        button {
-            width: 100%;
-            padding: 11px;
-            border: none;
-            border-radius: 10px;
-            background: #6c3ce9;
-            color: white;
-            font-size: 15px;
-            cursor: pointer;
-            margin-top: 8px;
-        }
+/* Cards */
 
-        button:hover {
-            background: #5426c4;
-        }
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:22px;
+}
 
-        .accept {
-            background: #159447;
-        }
+.card{
+    background:linear-gradient(145deg,#151515,#0d0d0d);
+    border:1px solid #292929;
+    padding:25px;
+    border-radius:18px;
+    transition:.35s;
+    animation:cardIn .6s ease both;
+}
 
-        .reject {
-            background: #d64545;
-        }
+.card:hover{
+    transform:translateY(-7px);
+    border-color:#7540d9;
+    box-shadow:0 10px 35px rgba(124,60,255,.15);
+}
 
-        .complete {
-            background: #e58a00;
-        }
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 
-        /* REQUEST */
+.avatar{
+    width:55px;
+    height:55px;
+    background:#21153b;
+    border:1px solid #56369a;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    margin-bottom:15px;
+}
 
-        .request-card {
-            background: #f8f6ff;
-            border: 1px solid #e4ddff;
-            padding: 18px;
-            border-radius: 12px;
-            margin-top: 12px;
-        }
+.card h3{
+    margin-bottom:8px;
+}
 
-        .status {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 12px;
-            background: #fff3cd;
-            color: #856404;
-            font-size: 12px;
-            margin-top: 8px;
-        }
+.card p{
+    color:#999;
+    margin:9px 0;
+}
 
-        .accepted-status {
-            background: #d4edda;
-            color: #155724;
-        }
+.tag{
+    display:inline-block;
+    background:#21153b;
+    color:#bd9cff;
+    border:1px solid #432875;
+    padding:5px 10px;
+    border-radius:12px;
+    font-size:12px;
+    margin:4px 2px;
+}
 
-        .completed-status {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
+/* Buttons */
 
-        /* CERTIFICATE */
+button{
+    width:100%;
+    padding:11px;
+    border:none;
+    border-radius:10px;
+    background:#7138d9;
+    color:white;
+    font-size:14px;
+    cursor:pointer;
+    margin-top:8px;
+    transition:.25s;
+}
 
-        .certificate {
-            background: #fffdf0;
-            border: 2px solid #e8c84a;
-            text-align: center;
-            padding: 30px;
-            border-radius: 18px;
-            margin-top: 15px;
-        }
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 7px 20px rgba(124,60,255,.25);
+}
 
-        .certificate-university {
-            font-size: 13px;
-            letter-spacing: 3px;
-            color: #6c3ce9;
-            font-weight: bold;
-            margin-bottom: 12px;
-        }
+.accept{
+    background:#168a48;
+}
 
-        .certificate-icon {
-            font-size: 55px;
-            margin-bottom: 12px;
-        }
+.reject{
+    background:#b83c3c;
+}
 
-        .certificate h2 {
-            color: #8a6800;
-            margin-bottom: 12px;
-        }
+.complete{
+    background:#bd7000;
+}
 
-        /* MESSAGE */
+/* Requests */
 
-        #message {
-            text-align: center;
-            margin: 20px 0;
-            font-weight: bold;
-            color: #6c3ce9;
-        }
+.request-card{
+    background:#111;
+    border:1px solid #292929;
+    padding:18px;
+    border-radius:12px;
+    margin-top:12px;
+    animation:fadeUp .5s ease;
+}
 
-        /* FOOTER */
+.request-card p{
+    color:#999;
+    margin-top:7px;
+}
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #777;
-        }
+.status{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:12px;
+    background:#4a3b08;
+    color:#ffd84d;
+    font-size:12px;
+    margin-top:8px;
+}
 
-        .hidden {
-            display: none;
-        }
+.accepted-status{
+    background:#123b24;
+    color:#6ee7a3;
+}
 
-        .role-label {
-            background: #eee5ff;
-            color: #6c3ce9;
-            display: inline-block;
-            padding: 8px 15px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
+.completed-status{
+    background:#12323b;
+    color:#72d9ed;
+}
 
-    </style>
+/* Certificate */
 
+.certificate{
+    background:linear-gradient(145deg,#17130a,#0e0e0e);
+    border:1px solid #a98729;
+    text-align:center;
+    padding:30px;
+    border-radius:18px;
+    margin-top:15px;
+    animation:certificateIn .8s ease;
+}
+
+@keyframes certificateIn{
+    from{
+        opacity:0;
+        transform:scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.certificate-university{
+    color:#b98cff;
+    font-size:12px;
+    letter-spacing:3px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.certificate-icon{
+    font-size:55px;
+    margin-bottom:12px;
+}
+
+.certificate h2{
+    color:#e8c84a;
+    margin-bottom:12px;
+}
+
+.certificate h3{
+    margin:10px 0;
+}
+
+/* Message */
+
+#message{
+    text-align:center;
+    margin:20px 0;
+    color:#b98cff;
+    font-weight:bold;
+}
+
+/* Footer */
+
+footer{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    padding:40px;
+    color:#666;
+    border-top:1px solid #1d1d1d;
+    margin-top:50px;
+}
+
+.hidden{
+    display:none;
+}
+
+/* Mobile */
+
+@media(max-width:650px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+        text-align:center;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .container{
+        width:92%;
+    }
+
+}
+</style>
 </head>
 
-
 <body>
-
-
-<!-- ================= NAVBAR ================= -->
 
 <nav>
 
     <div>
-
         <h2>🎓 Campus Skill Exchange</h2>
 
         <small class="university">
             TECHNO INDIA UNIVERSITY
         </small>
-
     </div>
-
 
     <div class="role-buttons">
 
-        <button
-            id="juniorBtn"
-            class="active"
-            onclick="showJunior()">
-
+        <button id="juniorBtn"
+                class="active"
+                onclick="showJunior()">
             👨‍🎓 Junior
-
         </button>
 
-
-        <button
-            id="mentorBtn"
-            onclick="showMentor()">
-
+        <button id="mentorBtn"
+                onclick="showMentor()">
             👨‍🏫 Mentor
-
         </button>
 
     </div>
 
 </nav>
 
-
-
-<!-- ================= HERO ================= -->
 
 <section class="hero">
 
@@ -346,7 +480,6 @@
         Connect with skilled seniors and learn together.
     </p>
 
-
     <input
         id="search"
         class="search"
@@ -357,52 +490,35 @@
 </section>
 
 
-
 <div class="container">
 
 
-<!-- ================= JUNIOR DASHBOARD ================= -->
+<!-- JUNIOR -->
 
 <div id="juniorDashboard">
-
 
     <div class="role-label">
         👨‍🎓 Junior Dashboard
     </div>
 
-
     <h2 class="section-title">
         🔍 Find a Mentor
     </h2>
 
-
-    <div
-        class="cards"
-        id="mentorCards">
-
-    </div>
-
+    <div class="cards" id="mentorCards"></div>
 
     <div id="message"></div>
 
-
     <div class="box">
 
-        <h2>
-            📤 My Connection Requests
-        </h2>
+        <h2>📤 My Connection Requests</h2>
 
-        <p style="margin-top:8px;color:#666;">
-
+        <p style="color:#777;margin-top:8px;">
             Track the mentors you have contacted.
-
         </p>
 
-
         <div id="juniorRequests">
-
             Loading...
-
         </div>
 
     </div>
@@ -410,36 +526,24 @@
 </div>
 
 
+<!-- MENTOR -->
 
-<!-- ================= MENTOR DASHBOARD ================= -->
-
-<div
-    id="mentorDashboard"
-    class="hidden">
-
+<div id="mentorDashboard" class="hidden">
 
     <div class="role-label">
         👨‍🏫 Mentor Dashboard
     </div>
 
-
     <div class="box">
 
-        <h2>
-            📩 Incoming Requests
-        </h2>
+        <h2>📩 Incoming Requests</h2>
 
-        <p style="margin-top:8px;color:#666;">
-
+        <p style="color:#777;margin-top:8px;">
             Requests from juniors who want to learn from you.
-
         </p>
-
 
         <div id="mentorRequests">
-
             Loading...
-
         </div>
 
     </div>
@@ -447,208 +551,154 @@
 
     <div class="box">
 
-        <h2>
-            🏆 My Contribution
-        </h2>
+        <h2>🏆 My Contribution</h2>
 
-
-        <p style="margin-top:8px;color:#666;">
-
+        <p style="color:#777;margin-top:8px;">
             Complete mentoring sessions to receive recognition.
-
         </p>
 
-
         <div id="certificatesList">
-
             No certificates yet.
-
         </div>
 
     </div>
 
 </div>
 
-
 </div>
 
-
-
-<!-- ================= FOOTER ================= -->
 
 <footer>
 
-    <strong>
-        TECHNO INDIA UNIVERSITY
-    </strong>
+    <strong>TECHNO INDIA UNIVERSITY</strong>
 
     <br><br>
 
     Campus Skill Exchange
 
-    <br>
+    <br><br>
 
-    Learn from your campus,
-    grow with your campus 💜
+    Learn • Share • Grow
 
 </footer>
 
 
-
 <script>
 
+/* ROLE SWITCH */
 
-// =====================================================
-// JUNIOR / MENTOR SWITCH
-// =====================================================
-
-
-function showJunior() {
+function showJunior(){
 
     document
         .getElementById("juniorDashboard")
         .classList.remove("hidden");
 
-
     document
         .getElementById("mentorDashboard")
         .classList.add("hidden");
-
 
     document
         .getElementById("juniorBtn")
         .classList.add("active");
 
-
     document
         .getElementById("mentorBtn")
         .classList.remove("active");
-
 
     document
         .getElementById("heroTitle")
         .innerText =
         "Learn From Your Campus";
 
-
     document
         .getElementById("heroText")
         .innerText =
         "Connect with skilled seniors and learn together.";
-
 }
 
 
+/* MENTOR VIEW */
 
-function showMentor() {
+function showMentor(){
 
     document
         .getElementById("juniorDashboard")
         .classList.add("hidden");
 
-
     document
         .getElementById("mentorDashboard")
         .classList.remove("hidden");
-
 
     document
         .getElementById("juniorBtn")
         .classList.remove("active");
 
-
     document
         .getElementById("mentorBtn")
         .classList.add("active");
-
 
     document
         .getElementById("heroTitle")
         .innerText =
         "Guide the Next Generation";
 
-
     document
         .getElementById("heroText")
         .innerText =
         "Share your skills and help juniors grow.";
 
-    
     loadMentorRequests();
-
     loadCertificates();
-
 }
 
 
+/* LOAD MENTORS */
 
-// =====================================================
-// LOAD MENTORS
-// =====================================================
+async function loadMentors(){
 
+    try{
 
-async function loadMentors() {
+        const response =
+            await fetch("/api/mentors");
 
-    const response =
-        await fetch("/api/mentors");
+        const mentors =
+            await response.json();
 
+        displayMentors(mentors);
 
-    const mentors =
-        await response.json();
+    }catch(error){
 
-
-    displayMentors(mentors);
-
-}
-
-
-
-// =====================================================
-// DISPLAY MENTORS
-// =====================================================
-
-
-function displayMentors(mentors) {
-
-    const container =
-        document.getElementById(
-            "mentorCards"
-        );
-
-
-    container.innerHTML = "";
-
-
-    if (mentors.length === 0) {
-
-        container.innerHTML =
-            "<p>No mentors found.</p>";
-
-        return;
+        console.log(error);
 
     }
 
+}
+
+
+/* DISPLAY MENTORS */
+
+function displayMentors(mentors){
+
+    const container =
+        document.getElementById("mentorCards");
+
+    container.innerHTML="";
 
     mentors.forEach(mentor => {
-
 
         const card =
             document.createElement("div");
 
-
-        card.className = "card";
-
+        card.className="card";
 
         const skillsHTML =
             mentor.skills
-            .map(
-                skill =>
+            .map(skill =>
                 `<span class="tag">${skill}</span>`
             )
             .join("");
 
-
-        card.innerHTML = `
+        card.innerHTML=`
 
             <div class="avatar">
                 👨‍💻
@@ -671,11 +721,9 @@ function displayMentors(mentors) {
             </p>
 
             <p>
-                ${
-                    mentor.available
+                ${mentor.available
                     ? "🟢 Available"
-                    : "🔴 Unavailable"
-                }
+                    : "🔴 Unavailable"}
             </p>
 
             <button
@@ -687,7 +735,6 @@ function displayMentors(mentors) {
 
         `;
 
-
         container.appendChild(card);
 
     });
@@ -695,543 +742,368 @@ function displayMentors(mentors) {
 }
 
 
+/* SEARCH */
 
-// =====================================================
-// SEARCH
-// =====================================================
-
-
-async function searchMentors() {
+async function searchMentors(){
 
     const skill =
         document
         .getElementById("search")
         .value;
 
-
-    if (skill.trim() === "") {
+    if(skill.trim()===""){
 
         loadMentors();
-
         return;
 
     }
 
+    try{
 
-    const response =
-        await fetch(
-            "/api/mentors/search?skill="
-            +
-            encodeURIComponent(skill)
-        );
+        const response =
+            await fetch(
+                "/api/mentors/search?skill="
+                +
+                encodeURIComponent(skill)
+            );
 
+        const mentors =
+            await response.json();
 
-    const mentors =
-        await response.json();
+        displayMentors(mentors);
 
+    }catch(error){
 
-    displayMentors(mentors);
+        console.log(error);
+
+    }
 
 }
 
 
+/* CONNECT */
 
-// =====================================================
-// CONNECT
-// =====================================================
+async function connect(id){
 
+    try{
 
-async function connect(id) {
+        const response =
+            await fetch(
+                "/api/connect",
+                {
+                    method:"POST",
 
+                    headers:{
+                        "Content-Type":
+                        "application/json"
+                    },
 
-    const response =
-        await fetch(
-            "/api/connect",
-            {
+                    body:JSON.stringify({
 
-                method: "POST",
+                        mentor_id:id,
 
-                headers: {
-                    "Content-Type":
-                    "application/json"
-                },
-
-                body: JSON.stringify({
-
-                    mentor_id: id,
-
-                    junior_name:
+                        junior_name:
                         "Anwesha Bhattacharjee"
 
-                })
+                    })
+                }
+            );
 
-            }
-        );
+        const result =
+            await response.json();
 
+        document
+            .getElementById("message")
+            .innerText =
+            "✅ " + result.message;
 
-    const result =
-        await response.json();
+        loadJuniorRequests();
 
+    }catch(error){
 
-    document
-        .getElementById("message")
-        .innerText =
-        "✅ " + result.message;
+        console.log(error);
 
-
-    loadJuniorRequests();
+    }
 
 }
 
 
+/* JUNIOR REQUESTS */
 
-// =====================================================
-// JUNIOR REQUESTS
-// =====================================================
+async function loadJuniorRequests(){
 
+    try{
 
-async function loadJuniorRequests() {
+        const response =
+            await fetch("/api/requests");
 
+        const requests =
+            await response.json();
 
-    const response =
-        await fetch(
-            "/api/requests"
-        );
-
-
-    const requests =
-        await response.json();
-
-
-    const container =
-        document.getElementById(
-            "juniorRequests"
-        );
-
-
-    container.innerHTML = "";
-
-
-    if (requests.length === 0) {
-
-        container.innerHTML =
-            "<p style='margin-top:15px;color:#777;'>No requests yet.</p>";
-
-        return;
-
-    }
-
-
-    requests.forEach(req => {
-
-
-        const div =
-            document.createElement(
-                "div"
+        const container =
+            document.getElementById(
+                "juniorRequests"
             );
 
+        container.innerHTML="";
 
-        div.className =
-            "request-card";
+        requests.forEach(req => {
 
+            const div =
+                document.createElement("div");
 
-        let statusClass = "";
+            div.className="request-card";
 
+            div.innerHTML=`
 
-        if (
-            req.status === "Accepted"
-        ) {
-
-            statusClass =
-                "accepted-status";
-
-        }
-
-
-        if (
-            req.status === "Completed"
-        ) {
-
-            statusClass =
-                "completed-status";
-
-        }
-
-
-        div.innerHTML = `
-
-            <strong>
-                👨‍🏫 ${req.mentor_name}
-            </strong>
-
-            <p>
-                Your mentoring request
-            </p>
-
-            <span class="status ${statusClass}">
-                ${req.status}
-            </span>
-
-        `;
-
-
-        container.appendChild(div);
-
-    });
-
-}
-
-
-
-// =====================================================
-// MENTOR REQUESTS
-// =====================================================
-
-
-async function loadMentorRequests() {
-
-
-    const response =
-        await fetch(
-            "/api/requests"
-        );
-
-
-    const requests =
-        await response.json();
-
-
-    const container =
-        document.getElementById(
-            "mentorRequests"
-        );
-
-
-    container.innerHTML = "";
-
-
-    if (requests.length === 0) {
-
-        container.innerHTML =
-            "<p style='margin-top:15px;color:#777;'>No incoming requests.</p>";
-
-        return;
-
-    }
-
-
-    requests.forEach(req => {
-
-
-        const div =
-            document.createElement(
-                "div"
-            );
-
-
-        div.className =
-            "request-card";
-
-
-        let statusClass = "";
-
-
-        if (
-            req.status === "Accepted"
-        ) {
-
-            statusClass =
-                "accepted-status";
-
-        }
-
-
-        if (
-            req.status === "Completed"
-        ) {
-
-            statusClass =
-                "completed-status";
-
-        }
-
-
-        div.innerHTML = `
-
-            <strong>
-                👨‍🎓 ${req.junior_name}
-            </strong>
-
-            <p>
-                wants to learn from
                 <strong>
-                    ${req.mentor_name}
+                    👨‍🏫 ${req.mentor_name}
                 </strong>
-            </p>
 
-            <span class="status ${statusClass}">
-                ${req.status}
-            </span>
-
-
-            ${
-                req.status === "Pending"
-                ?
-                `
-                <button
-                    class="accept"
-                    onclick="acceptRequest(${req.id})">
-
-                    ✅ Accept Request
-
-                </button>
-                `
-                :
-                ""
-            }
-
-
-            ${
-                req.status === "Accepted"
-                ?
-                `
-                <button
-                    class="complete"
-                    onclick="completeSession(${req.id})">
-
-                    🎓 Complete Session
-
-                </button>
-                `
-                :
-                ""
-            }
-
-
-            ${
-                req.status === "Completed"
-                ?
-                `
-                <p style="margin-top:12px;color:#0c5460;">
-
-                    🏆 Mentoring session completed!
-
+                <p>
+                    Connection request
                 </p>
-                `
-                :
-                ""
-            }
 
-        `;
+                <span class="status">
+                    ${req.status}
+                </span>
 
+            `;
 
-        container.appendChild(div);
+            container.appendChild(div);
 
-    });
+        });
+
+    }catch(error){
+
+        console.log(error);
+
+    }
 
 }
 
 
+/* MENTOR REQUESTS */
 
-// =====================================================
-// ACCEPT
-// =====================================================
+async function loadMentorRequests(){
+
+    try{
+
+        const response =
+            await fetch("/api/requests");
+
+        const requests =
+            await response.json();
+
+        const container =
+            document.getElementById(
+                "mentorRequests"
+            );
+
+        container.innerHTML="";
+
+        requests.forEach(req => {
+
+            const div =
+                document.createElement("div");
+
+            div.className="request-card";
+
+            div.innerHTML=`
+
+                <strong>
+                    👨‍🎓 ${req.junior_name}
+                </strong>
+
+                <p>
+                    wants to learn from
+                    <strong>
+                        ${req.mentor_name}
+                    </strong>
+                </p>
+
+                <span class="status">
+                    ${req.status}
+                </span>
+
+                ${
+                    req.status === "Pending"
+                    ?
+                    `
+                    <button
+                        class="accept"
+                        onclick="acceptRequest(${req.id})">
+
+                        ✅ Accept Request
+
+                    </button>
+                    `
+                    :
+                    ""
+                }
+
+                ${
+                    req.status === "Accepted"
+                    ?
+                    `
+                    <button
+                        class="complete"
+                        onclick="completeSession(${req.id})">
+
+                        🎓 Complete Session
+
+                    </button>
+                    `
+                    :
+                    ""
+                }
+
+            `;
+
+            container.appendChild(div);
+
+        });
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+}
 
 
-async function acceptRequest(id) {
+/* ACCEPT */
 
+async function acceptRequest(id){
 
     const response =
         await fetch(
             `/api/requests/${id}/accept`,
             {
-                method: "POST"
+                method:"POST"
             }
         );
-
 
     const result =
         await response.json();
 
-
-    alert(
-        "✅ " + result.message
-    );
-
+    alert("✅ " + result.message);
 
     loadMentorRequests();
 
 }
 
 
+/* COMPLETE */
 
-// =====================================================
-// COMPLETE SESSION
-// =====================================================
-
-
-async function completeSession(id) {
-
+async function completeSession(id){
 
     const response =
         await fetch(
             `/api/requests/${id}/complete`,
             {
-                method: "POST"
+                method:"POST"
             }
         );
-
 
     const result =
         await response.json();
 
-
-    alert(
-        "🏆 " + result.message
-    );
-
+    alert("🏆 " + result.message);
 
     loadMentorRequests();
-
     loadCertificates();
 
 }
 
 
+/* CERTIFICATES */
 
-// =====================================================
-// CERTIFICATES
-// =====================================================
+async function loadCertificates(){
 
+    try{
 
-async function loadCertificates() {
-
-
-    const response =
-        await fetch(
-            "/api/certificates"
-        );
-
-
-    const certificates =
-        await response.json();
-
-
-    const container =
-        document.getElementById(
-            "certificatesList"
-        );
-
-
-    container.innerHTML = "";
-
-
-    if (
-        certificates.length === 0
-    ) {
-
-        container.innerHTML =
-            "No certificates yet.";
-
-        return;
-
-    }
-
-
-    certificates.forEach(cert => {
-
-
-        const div =
-            document.createElement(
-                "div"
+        const response =
+            await fetch(
+                "/api/certificates"
             );
 
+        const certificates =
+            await response.json();
 
-        div.className =
-            "certificate";
+        const container =
+            document.getElementById(
+                "certificatesList"
+            );
 
+        container.innerHTML="";
 
-        div.innerHTML = `
+        certificates.forEach(cert => {
 
-            <div class="certificate-university">
+            const div =
+                document.createElement("div");
 
-                TECHNO INDIA UNIVERSITY
+            div.className="certificate";
 
-            </div>
+            div.innerHTML=`
 
+                <div class="certificate-university">
+                    TECHNO INDIA UNIVERSITY
+                </div>
 
-            <div class="certificate-icon">
+                <div class="certificate-icon">
+                    🏆
+                </div>
 
-                🏆
+                <h2>
+                    Mentor Contribution Certificate
+                </h2>
 
-            </div>
+                <p>
+                    This recognition is awarded to
+                </p>
 
+                <h3>
+                    ${cert.mentor_name}
+                </h3>
 
-            <h2>
-                Mentor Contribution Certificate
-            </h2>
+                <p>
+                    for mentoring
+                    <strong>
+                        ${cert.junior_name}
+                    </strong>
+                </p>
 
+                <p style="margin-top:12px;">
+                    Skill:
+                    <strong>
+                        ${cert.skill}
+                    </strong>
+                </p>
 
-            <p>
-                This recognition is awarded to
-            </p>
+            `;
 
+            container.appendChild(div);
 
-            <h3>
-                ${cert.mentor_name}
-            </h3>
+        });
 
+    }catch(error){
 
-            <p>
-                for mentoring
-                <strong>
-                    ${cert.junior_name}
-                </strong>
-            </p>
+        console.log(error);
 
-
-            <p style="margin-top:12px;">
-
-                Skill:
-                <strong>
-                    ${cert.skill}
-                </strong>
-
-            </p>
-
-
-            <p style="margin-top:15px;color:#666;">
-
-                Campus Skill Exchange
-
-            </p>
-
-        `;
-
-
-        container.appendChild(div);
-
-    });
+    }
 
 }
 
 
-
-// =====================================================
-// START
-// =====================================================
-
+/* START */
 
 loadMentors();
-
 loadJuniorRequests();
-
 loadCertificates();
-
 
 </script>
 
-
 </body>
-
 </html>

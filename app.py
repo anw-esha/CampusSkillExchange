@@ -4,6 +4,7 @@ import sqlite3
 app = Flask(__name__)
 
 DATABASE = "campus.db"
+JUNIOR_NAME = "Anwesha Bhattacharjee"
 
 
 # =========================
@@ -20,6 +21,10 @@ def init_db():
 
     conn = get_db()
 
+    # -------------------------
+    # MENTORS
+    # -------------------------
+
     conn.execute("""
         CREATE TABLE IF NOT EXISTS mentors (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,6 +36,10 @@ def init_db():
         )
     """)
 
+    # -------------------------
+    # REQUESTS
+    # -------------------------
+
     conn.execute("""
         CREATE TABLE IF NOT EXISTS requests (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -39,6 +48,10 @@ def init_db():
             status TEXT DEFAULT 'Pending'
         )
     """)
+
+    # -------------------------
+    # CERTIFICATES
+    # -------------------------
 
     conn.execute("""
         CREATE TABLE IF NOT EXISTS certificates (
@@ -50,7 +63,36 @@ def init_db():
         )
     """)
 
-    # Create mentors only if database is empty
+    # -------------------------
+    # LEARNING PROGRESS
+    # -------------------------
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS progress (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            junior_name TEXT,
+            skill TEXT,
+            progress INTEGER DEFAULT 0
+        )
+    """)
+
+    # -------------------------
+    # DOUBT DESK
+    # -------------------------
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS doubts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            junior_name TEXT,
+            question TEXT,
+            status TEXT DEFAULT 'Open'
+        )
+    """)
+
+    # -------------------------
+    # DEFAULT MENTORS
+    # -------------------------
+
     count = conn.execute(
         "SELECT COUNT(*) FROM mentors"
     ).fetchone()[0]
@@ -87,23 +129,117 @@ def init_db():
             VALUES (?, ?, ?, ?, ?)
         """, mentors)
 
-    # Old student name correction
+    # -------------------------
+    # OLD NAME CORRECTION
+    # -------------------------
+
     conn.execute("""
         UPDATE requests
-        SET junior_name = 'Anwesha Bhattacharjee'
+        SET junior_name = ?
         WHERE junior_name IN
         ('Shibangi Paul', 'Campus Junior')
-    """)
+    """, (JUNIOR_NAME,))
 
     conn.execute("""
         UPDATE certificates
-        SET junior_name = 'Anwesha Bhattacharjee'
+        SET junior_name = ?
         WHERE junior_name IN
         ('Shibangi Paul', 'Campus Junior')
-    """)
+    """, (JUNIOR_NAME,))
 
     conn.commit()
     conn.close()
+
+
+# =========================
+# SMART MATCHING ENGINE
+# =========================
+
+def calculate_match_score(
+    mentor,
+    requested_skill=""
+):
+
+    score = 0
+
+    requested_skill = (
+        requested_skill
+        .strip()
+        .lower()
+    )
+
+    skills = [
+        s.strip().lower()
+        for s in mentor["skills"].split(",")
+    ]
+
+    # 1. Skill match
+    if requested_skill:
+
+        if any(
+            requested_skill in skill
+            or skill in requested_skill
+            for skill in skills
+        ):
+            score += 50
+
+    # 2. Availability
+    if mentor["available"]:
+        score += 20
+
+    # 3. Rating
+    score += (
+        float(mentor["rating"]) / 5
+    ) * 20
+
+    # 4. Experience
+    experience = (
+        mentor["experience"] or ""
+    ).lower()
+
+    if "2 years" in experience:
+        score += 10
+
+    elif "3 years" in experience:
+        score += 10
+
+    elif "4 years" in experience:
+        score += 10
+
+    elif "5 years" in experience:
+        score += 10
+
+    elif "year" in experience:
+        score += 5
+
+    return round(
+        min(score, 100),
+        1
+    )
+
+
+def mentor_to_dict(
+    row,
+    requested_skill=""
+):
+
+    return {
+        "id": row["id"],
+        "name": row["name"],
+        "skills":
+            row["skills"].split(","),
+        "rating":
+            row["rating"],
+        "available":
+            bool(row["available"]),
+        "experience":
+            row["experience"],
+        "match_score":
+            calculate_match_score(
+                row,
+                requested_skill
+            )
+    }
 
 
 # =========================
@@ -112,7 +248,10 @@ def init_db():
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+
+    return render_template(
+        "index.html"
+    )
 
 
 # =========================
@@ -124,45 +263,48 @@ def get_mentors():
 
     conn = get_db()
 
-    rows = conn.execute(
-        "SELECT * FROM mentors"
-    ).fetchall()
+    rows = conn.execute("""
+        SELECT *
+        FROM mentors
+    """).fetchall()
 
     conn.close()
 
-    mentors = []
+    mentors = [
+        mentor_to_dict(row)
+        for row in rows
+    ]
 
-    for row in rows:
-
-        mentors.append({
-            "id": row["id"],
-            "name": row["name"],
-            "skills": row["skills"].split(","),
-            "rating": row["rating"],
-            "available": bool(row["available"]),
-            "experience": row["experience"]
-        })
+    # Highest smart-match score first
+    mentors.sort(
+        key=lambda x:
+        x["match_score"],
+        reverse=True
+    )
 
     return jsonify(mentors)
 
 
 # =========================
-# SEARCH
+# SMART SEARCH
 # =========================
 
-@app.route("/api/mentors/search")
+@app.route(
+    "/api/mentors/search"
+)
 def search_mentors():
 
     skill = request.args.get(
         "skill",
         ""
-    ).lower()
+    ).strip().lower()
 
     conn = get_db()
 
-    rows = conn.execute(
-        "SELECT * FROM mentors"
-    ).fetchall()
+    rows = conn.execute("""
+        SELECT *
+        FROM mentors
+    """).fetchall()
 
     conn.close()
 
@@ -170,25 +312,77 @@ def search_mentors():
 
     for row in rows:
 
-        skills = row["skills"].split(",")
+        skills = [
+            s.strip().lower()
+            for s in row["skills"].split(",")
+        ]
 
-        if any(
-            skill in s.lower()
-            for s in skills
+        if (
+            not skill
+            or any(
+                skill in s
+                or s in skill
+                for s in skills
+            )
         ):
 
-            results.append({
-                "id": row["id"],
-                "name": row["name"],
-                "skills": skills,
-                "rating": row["rating"],
-                "available":
-                    bool(row["available"]),
-                "experience":
-                    row["experience"]
-            })
+            results.append(
+                mentor_to_dict(
+                    row,
+                    skill
+                )
+            )
+
+    # Smart ranking
+    results.sort(
+        key=lambda x:
+        x["match_score"],
+        reverse=True
+    )
 
     return jsonify(results)
+
+
+# =========================
+# SMART RECOMMENDATION
+# =========================
+
+@app.route(
+    "/api/recommendations"
+)
+def recommendations():
+
+    skill = request.args.get(
+        "skill",
+        ""
+    )
+
+    conn = get_db()
+
+    rows = conn.execute("""
+        SELECT *
+        FROM mentors
+    """).fetchall()
+
+    conn.close()
+
+    recommendations = [
+        mentor_to_dict(
+            row,
+            skill
+        )
+        for row in rows
+    ]
+
+    recommendations.sort(
+        key=lambda x:
+        x["match_score"],
+        reverse=True
+    )
+
+    return jsonify(
+        recommendations[:5]
+    )
 
 
 # =========================
@@ -201,9 +395,12 @@ def search_mentors():
 )
 def create_profile():
 
-    data = request.get_json()
+    data = request.get_json() or {}
 
-    name = data.get("name", "").strip()
+    name = data.get(
+        "name",
+        ""
+    ).strip()
 
     skills = data.get(
         "skills",
@@ -223,13 +420,21 @@ def create_profile():
                 "Name and skills are required."
         }), 400
 
-    skills_text = ",".join(skills)
+    skills_text = ",".join(
+        skills
+    )
 
     conn = get_db()
 
     cursor = conn.execute("""
         INSERT INTO mentors
-        (name, skills, rating, available, experience)
+        (
+            name,
+            skills,
+            rating,
+            available,
+            experience
+        )
         VALUES (?, ?, ?, ?, ?)
     """, (
         name,
@@ -263,24 +468,56 @@ def create_profile():
 )
 def connect():
 
-    data = request.get_json()
+    data = request.get_json() or {}
 
     mentor_id = data.get(
         "mentor_id"
     )
 
-    # Student
-    junior_name = "Anwesha Bhattacharjee"
+    if not mentor_id:
+
+        return jsonify({
+            "success": False,
+            "message":
+                "Mentor ID is required."
+        }), 400
 
     conn = get_db()
 
+    # Prevent duplicate pending request
+    existing = conn.execute("""
+        SELECT id
+        FROM requests
+        WHERE mentor_id = ?
+        AND junior_name = ?
+        AND status IN
+        ('Pending', 'Accepted')
+    """, (
+        mentor_id,
+        JUNIOR_NAME
+    )).fetchone()
+
+    if existing:
+
+        conn.close()
+
+        return jsonify({
+            "success": False,
+            "message":
+                "You already have an active request."
+        })
+
     conn.execute("""
         INSERT INTO requests
-        (mentor_id, junior_name, status)
+        (
+            mentor_id,
+            junior_name,
+            status
+        )
         VALUES (?, ?, ?)
     """, (
         mentor_id,
-        junior_name,
+        JUNIOR_NAME,
         "Pending"
     ))
 
@@ -290,7 +527,7 @@ def connect():
     return jsonify({
         "success": True,
         "message":
-            "Connection request sent to mentor!"
+            "Smart connection request sent!"
     })
 
 
@@ -322,7 +559,8 @@ def get_requests():
     for row in rows:
 
         result.append({
-            "id": row["id"],
+            "id":
+                row["id"],
             "junior_name":
                 row["junior_name"],
             "mentor_name":
@@ -342,20 +580,34 @@ def get_requests():
     "/api/requests/<int:request_id>/accept",
     methods=["POST"]
 )
-def accept_request(request_id):
+def accept_request(
+    request_id
+):
 
     conn = get_db()
 
-    conn.execute("""
+    cursor = conn.execute("""
         UPDATE requests
         SET status = 'Accepted'
         WHERE id = ?
+        AND status = 'Pending'
     """, (
         request_id,
     ))
 
     conn.commit()
+
+    updated = cursor.rowcount
+
     conn.close()
+
+    if updated == 0:
+
+        return jsonify({
+            "success": False,
+            "message":
+                "Request is no longer pending."
+        }), 400
 
     return jsonify({
         "success": True,
@@ -372,7 +624,9 @@ def accept_request(request_id):
     "/api/requests/<int:request_id>/complete",
     methods=["POST"]
 )
-def complete_session(request_id):
+def complete_session(
+    request_id
+):
 
     conn = get_db()
 
@@ -410,6 +664,7 @@ def complete_session(request_id):
                 "Accept the request first."
         }), 400
 
+    # Complete request
     conn.execute("""
         UPDATE requests
         SET status = 'Completed'
@@ -418,8 +673,13 @@ def complete_session(request_id):
         request_id,
     ))
 
-    skill = row["skills"].split(",")[0]
+    skill = (
+        row["skills"]
+        .split(",")[0]
+        .strip()
+    )
 
+    # Create certificate
     conn.execute("""
         INSERT INTO certificates
         (
@@ -435,6 +695,49 @@ def complete_session(request_id):
         skill,
         "Mentor Contribution Badge"
     ))
+
+    # Update learning progress
+    existing_progress = conn.execute("""
+        SELECT id, progress
+        FROM progress
+        WHERE junior_name = ?
+        AND skill = ?
+    """, (
+        row["junior_name"],
+        skill
+    )).fetchone()
+
+    if existing_progress:
+
+        new_progress = min(
+            existing_progress["progress"] + 25,
+            100
+        )
+
+        conn.execute("""
+            UPDATE progress
+            SET progress = ?
+            WHERE id = ?
+        """, (
+            new_progress,
+            existing_progress["id"]
+        ))
+
+    else:
+
+        conn.execute("""
+            INSERT INTO progress
+            (
+                junior_name,
+                skill,
+                progress
+            )
+            VALUES (?, ?, ?)
+        """, (
+            row["junior_name"],
+            skill,
+            25
+        ))
 
     conn.commit()
     conn.close()
@@ -470,7 +773,8 @@ def get_certificates():
     for row in rows:
 
         certificates.append({
-            "id": row["id"],
+            "id":
+                row["id"],
             "mentor_name":
                 row["mentor_name"],
             "junior_name":
@@ -482,6 +786,132 @@ def get_certificates():
         })
 
     return jsonify(certificates)
+
+
+# =========================
+# LEARNING PROGRESS
+# =========================
+
+@app.route(
+    "/api/progress"
+)
+def get_progress():
+
+    conn = get_db()
+
+    rows = conn.execute("""
+        SELECT *
+        FROM progress
+        WHERE junior_name = ?
+        ORDER BY id DESC
+    """, (
+        JUNIOR_NAME,
+    )).fetchall()
+
+    conn.close()
+
+    progress = []
+
+    for row in rows:
+
+        progress.append({
+            "skill":
+                row["skill"],
+            "progress":
+                row["progress"]
+        })
+
+    return jsonify(progress)
+
+
+# =========================
+# DOUBT DESK
+# =========================
+
+@app.route(
+    "/api/doubts",
+    methods=["POST"]
+)
+def create_doubt():
+
+    data = request.get_json() or {}
+
+    question = data.get(
+        "question",
+        ""
+    ).strip()
+
+    if not question:
+
+        return jsonify({
+            "success": False,
+            "message":
+                "Please enter your question."
+        }), 400
+
+    conn = get_db()
+
+    cursor = conn.execute("""
+        INSERT INTO doubts
+        (
+            junior_name,
+            question,
+            status
+        )
+        VALUES (?, ?, ?)
+    """, (
+        JUNIOR_NAME,
+        question,
+        "Open"
+    ))
+
+    conn.commit()
+
+    doubt_id = cursor.lastrowid
+
+    conn.close()
+
+    return jsonify({
+        "success": True,
+        "message":
+            "Doubt submitted successfully!",
+        "id":
+            doubt_id
+    })
+
+
+@app.route(
+    "/api/doubts"
+)
+def get_doubts():
+
+    conn = get_db()
+
+    rows = conn.execute("""
+        SELECT *
+        FROM doubts
+        WHERE junior_name = ?
+        ORDER BY id DESC
+    """, (
+        JUNIOR_NAME,
+    )).fetchall()
+
+    conn.close()
+
+    doubts = []
+
+    for row in rows:
+
+        doubts.append({
+            "id":
+                row["id"],
+            "question":
+                row["question"],
+            "status":
+                row["status"]
+        })
+
+    return jsonify(doubts)
 
 
 # =========================

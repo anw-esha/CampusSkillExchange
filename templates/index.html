@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Campus Skill Exchange | TIU</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
@@ -20,7 +23,8 @@ body{
     min-height:100vh;
 }
 
-/* Background animation */
+/* BACKGROUND */
+
 body::before{
     content:"";
     position:fixed;
@@ -59,7 +63,8 @@ body::after{
     to{transform:translate(-70px,-50px);}
 }
 
-/* Navbar */
+
+/* NAVBAR */
 
 nav{
     position:relative;
@@ -106,7 +111,8 @@ nav h2{
     border-color:#9b65ff;
 }
 
-/* Hero */
+
+/* HERO */
 
 .hero{
     position:relative;
@@ -114,9 +120,11 @@ nav h2{
     text-align:center;
     padding:75px 20px 65px;
     background:
-        radial-gradient(circle at center,
+    radial-gradient(
+        circle at center,
         rgba(124,60,255,.18),
-        transparent 55%);
+        transparent 55%
+    );
 }
 
 .hero h3{
@@ -177,7 +185,8 @@ nav h2{
     box-shadow:0 0 20px rgba(139,92,246,.2);
 }
 
-/* Main */
+
+/* MAIN */
 
 .container{
     position:relative;
@@ -211,16 +220,19 @@ nav h2{
     box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
-/* Cards */
+
+/* CARDS */
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
     gap:22px;
 }
 
 .card{
-    background:linear-gradient(145deg,#151515,#0d0d0d);
+    background:
+    linear-gradient(145deg,#151515,#0d0d0d);
     border:1px solid #292929;
     padding:25px;
     border-radius:18px;
@@ -231,7 +243,8 @@ nav h2{
 .card:hover{
     transform:translateY(-7px);
     border-color:#7540d9;
-    box-shadow:0 10px 35px rgba(124,60,255,.15);
+    box-shadow:
+    0 10px 35px rgba(124,60,255,.15);
 }
 
 @keyframes cardIn{
@@ -278,7 +291,8 @@ nav h2{
     margin:4px 2px;
 }
 
-/* Buttons */
+
+/* BUTTONS */
 
 button{
     width:100%;
@@ -295,22 +309,20 @@ button{
 
 button:hover{
     transform:translateY(-2px);
-    box-shadow:0 7px 20px rgba(124,60,255,.25);
+    box-shadow:
+    0 7px 20px rgba(124,60,255,.25);
 }
 
 .accept{
     background:#168a48;
 }
 
-.reject{
-    background:#b83c3c;
-}
-
 .complete{
     background:#bd7000;
 }
 
-/* Requests */
+
+/* REQUESTS */
 
 .request-card{
     background:#111;
@@ -336,20 +348,12 @@ button:hover{
     margin-top:8px;
 }
 
-.accepted-status{
-    background:#123b24;
-    color:#6ee7a3;
-}
 
-.completed-status{
-    background:#12323b;
-    color:#72d9ed;
-}
-
-/* Certificate */
+/* CERTIFICATE */
 
 .certificate{
-    background:linear-gradient(145deg,#17130a,#0e0e0e);
+    background:
+    linear-gradient(145deg,#17130a,#0e0e0e);
     border:1px solid #a98729;
     text-align:center;
     padding:30px;
@@ -391,7 +395,69 @@ button:hover{
     margin:10px 0;
 }
 
-/* Message */
+
+/* SMART SCORE */
+
+.match-score{
+    margin-top:15px;
+    padding:12px;
+    border-radius:12px;
+    background:#15101f;
+    border:1px solid #432875;
+}
+
+.match-score strong{
+    color:#c39aff;
+    font-size:18px;
+}
+
+
+/* PROGRESS */
+
+.progress-bar{
+    width:100%;
+    height:12px;
+    background:#242424;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.progress-fill{
+    height:100%;
+    width:70%;
+    background:#7c3cff;
+    border-radius:20px;
+    animation:progressIn 1s ease;
+}
+
+@keyframes progressIn{
+    from{width:0;}
+    to{width:70%;}
+}
+
+
+/* DOUBT */
+
+textarea{
+    width:100%;
+    min-height:100px;
+    margin-top:18px;
+    padding:15px;
+    border-radius:12px;
+    background:#111;
+    color:white;
+    border:1px solid #333;
+    resize:vertical;
+    outline:none;
+}
+
+textarea:focus{
+    border-color:#8b5cf6;
+}
+
+
+/* MESSAGE */
 
 #message{
     text-align:center;
@@ -400,7 +466,8 @@ button:hover{
     font-weight:bold;
 }
 
-/* Footer */
+
+/* FOOTER */
 
 footer{
     position:relative;
@@ -416,7 +483,8 @@ footer{
     display:none;
 }
 
-/* Mobile */
+
+/* MOBILE */
 
 @media(max-width:650px){
 
@@ -435,675 +503,1208 @@ footer{
     }
 
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- NAVBAR -->
+
 <nav>
 
-    <div>
-        <h2>🎓 Campus Skill Exchange</h2>
+<div>
 
-        <small class="university">
-            TECHNO INDIA UNIVERSITY
-        </small>
-    </div>
+<h2>🎓 Campus Skill Exchange</h2>
 
-    <div class="role-buttons">
+<small class="university">
+TECHNO INDIA UNIVERSITY
+</small>
 
-        <button id="juniorBtn"
-                class="active"
-                onclick="showJunior()">
-            👨‍🎓 Junior
-        </button>
+</div>
 
-        <button id="mentorBtn"
-                onclick="showMentor()">
-            👨‍🏫 Mentor
-        </button>
 
-    </div>
+<div class="role-buttons">
+
+<button
+id="juniorBtn"
+class="active"
+onclick="showJunior()">
+
+👨‍🎓 Junior
+
+</button>
+
+
+<button
+id="mentorBtn"
+onclick="showMentor()">
+
+👨‍🏫 Mentor
+
+</button>
+
+</div>
 
 </nav>
 
 
+
+<!-- HERO -->
+
 <section class="hero">
 
-    <h3>TECHNO INDIA UNIVERSITY</h3>
+<h3>TECHNO INDIA UNIVERSITY</h3>
 
-    <h1 id="heroTitle">
-        Learn From Your Campus
-    </h1>
+<h1 id="heroTitle">
+Learn From Your Campus
+</h1>
 
-    <p id="heroText">
-        Connect with skilled seniors and learn together.
-    </p>
+<p id="heroText">
+Connect with skilled seniors and learn together.
+</p>
 
-    <input
-        id="search"
-        class="search"
-        placeholder="🔍 Search Python, C++, AI/ML..."
-        onkeyup="searchMentors()"
-    >
+<input
+id="search"
+class="search"
+placeholder="🔍 Search Python, C++, AI/ML..."
+onkeyup="searchMentors()"
+>
 
 </section>
+
 
 
 <div class="container">
 
 
-<!-- JUNIOR -->
+<!-- =========================
+     JUNIOR DASHBOARD
+========================= -->
 
 <div id="juniorDashboard">
 
-    <div class="role-label">
-        👨‍🎓 Junior Dashboard
-    </div>
+<div class="role-label">
+👨‍🎓 Junior Dashboard
+</div>
 
-    <h2 class="section-title">
-        🔍 Find a Mentor
-    </h2>
 
-    <div class="cards" id="mentorCards"></div>
+<h2 class="section-title">
+🔍 Find a Mentor
+</h2>
 
-    <div id="message"></div>
 
-    <div class="box">
+<div
+class="cards"
+id="mentorCards">
+</div>
 
-        <h2>📤 My Connection Requests</h2>
 
-        <p style="color:#777;margin-top:8px;">
-            Track the mentors you have contacted.
-        </p>
+<div id="message"></div>
 
-        <div id="juniorRequests">
-            Loading...
-        </div>
 
-    </div>
+<!-- SMART MATCHING -->
+
+<div class="box">
+
+<h2>🎯 Smart Mentor Matching</h2>
+
+<p style="color:#777;margin-top:8px;">
+
+Mentors are ranked using skill match,
+availability, experience and peer rating.
+
+</p>
+
+
+<div class="cards" style="margin-top:20px;">
+
+
+<div class="card">
+
+<div class="avatar">
+🤖
+</div>
+
+<h3>
+Skill Match
+</h3>
+
+<p>
+Matches your learning goal with
+relevant mentor skills.
+</p>
+
+<span class="tag">
+Smart Matching
+</span>
 
 </div>
 
 
-<!-- MENTOR -->
 
-<div id="mentorDashboard" class="hidden">
+<div class="card">
 
-    <div class="role-label">
-        👨‍🏫 Mentor Dashboard
-    </div>
+<div class="avatar">
+🟢
+</div>
 
-    <div class="box">
+<h3>
+Availability
+</h3>
 
-        <h2>📩 Incoming Requests</h2>
+<p>
+Prioritizes mentors who are
+currently available.
+</p>
 
-        <p style="color:#777;margin-top:8px;">
-            Requests from juniors who want to learn from you.
-        </p>
+<span class="tag">
+Live Status
+</span>
 
-        <div id="mentorRequests">
-            Loading...
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="box">
 
-        <h2>🏆 My Contribution</h2>
+<div class="card">
 
-        <p style="color:#777;margin-top:8px;">
-            Complete mentoring sessions to receive recognition.
-        </p>
+<div class="avatar">
+⭐
+</div>
 
-        <div id="certificatesList">
-            No certificates yet.
-        </div>
+<h3>
+Peer Rating
+</h3>
 
-    </div>
+<p>
+Uses mentor ratings to improve
+recommendations.
+</p>
+
+<span class="tag">
+Rating Based
+</span>
+
+</div>
+
 
 </div>
 
 </div>
 
+
+
+<!-- LEARNING PROGRESS -->
+
+<div class="box">
+
+<h2>
+📈 Learning Progress
+</h2>
+
+<p style="color:#777;margin-top:8px;">
+
+Track your learning journey after
+connecting with a mentor.
+
+</p>
+
+
+<div style="margin-top:20px;">
+
+<p>
+Python Fundamentals
+</p>
+
+
+<div class="progress-bar">
+
+<div class="progress-fill"></div>
+
+</div>
+
+
+<p style="color:#b98cff;margin-top:8px;">
+
+70% Completed
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- DOUBT DESK -->
+
+<div class="box">
+
+<h2>
+💬 Doubt Desk
+</h2>
+
+<p style="color:#777;margin-top:8px;">
+
+Ask questions and get help from
+skilled campus mentors.
+
+</p>
+
+
+<textarea
+id="doubtInput"
+placeholder="Type your doubt here..."
+></textarea>
+
+
+<button onclick="postDoubt()">
+
+📤 Post Doubt
+
+</button>
+
+
+<div
+id="doubtMessage"
+style="color:#b98cff;margin-top:12px;">
+</div>
+
+</div>
+
+
+
+<!-- CONNECTION REQUESTS -->
+
+<div class="box">
+
+<h2>
+📤 My Connection Requests
+</h2>
+
+<p style="color:#777;margin-top:8px;">
+
+Track the mentors you have contacted.
+
+</p>
+
+
+<div id="juniorRequests">
+Loading...
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =========================
+     MENTOR DASHBOARD
+========================= -->
+
+<div
+id="mentorDashboard"
+class="hidden">
+
+
+<div class="role-label">
+👨‍🏫 Mentor Dashboard
+</div>
+
+
+<div class="box">
+
+<h2>
+📩 Incoming Requests
+</h2>
+
+<p style="color:#777;margin-top:8px;">
+
+Requests from juniors who want
+to learn from you.
+
+</p>
+
+
+<div id="mentorRequests">
+Loading...
+</div>
+
+</div>
+
+
+
+<div class="box">
+
+<h2>
+🏆 My Contribution
+</h2>
+
+<p style="color:#777;margin-top:8px;">
+
+Complete mentoring sessions to
+receive recognition.
+
+</p>
+
+
+<div id="certificatesList">
+
+No certificates yet.
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- FOOTER -->
 
 <footer>
 
-    <strong>TECHNO INDIA UNIVERSITY</strong>
+<strong>
+TECHNO INDIA UNIVERSITY
+</strong>
 
-    <br><br>
+<br><br>
 
-    Campus Skill Exchange
+Campus Skill Exchange
 
-    <br><br>
+<br><br>
 
-    Learn • Share • Grow
+Learn • Share • Grow
 
 </footer>
 
 
+
 <script>
 
-/* ROLE SWITCH */
+
+/* =========================
+   ROLE SWITCH
+========================= */
 
 function showJunior(){
 
-    document
-        .getElementById("juniorDashboard")
-        .classList.remove("hidden");
+document
+.getElementById("juniorDashboard")
+.classList
+.remove("hidden");
 
-    document
-        .getElementById("mentorDashboard")
-        .classList.add("hidden");
 
-    document
-        .getElementById("juniorBtn")
-        .classList.add("active");
+document
+.getElementById("mentorDashboard")
+.classList
+.add("hidden");
 
-    document
-        .getElementById("mentorBtn")
-        .classList.remove("active");
 
-    document
-        .getElementById("heroTitle")
-        .innerText =
-        "Learn From Your Campus";
+document
+.getElementById("juniorBtn")
+.classList
+.add("active");
 
-    document
-        .getElementById("heroText")
-        .innerText =
-        "Connect with skilled seniors and learn together.";
+
+document
+.getElementById("mentorBtn")
+.classList
+.remove("active");
+
+
+document
+.getElementById("heroTitle")
+.innerText =
+"Learn From Your Campus";
+
+
+document
+.getElementById("heroText")
+.innerText =
+"Connect with skilled seniors and learn together.";
+
 }
 
 
-/* MENTOR VIEW */
+/* =========================
+   MENTOR VIEW
+========================= */
 
 function showMentor(){
 
-    document
-        .getElementById("juniorDashboard")
-        .classList.add("hidden");
+document
+.getElementById("juniorDashboard")
+.classList
+.add("hidden");
 
-    document
-        .getElementById("mentorDashboard")
-        .classList.remove("hidden");
 
-    document
-        .getElementById("juniorBtn")
-        .classList.remove("active");
+document
+.getElementById("mentorDashboard")
+.classList
+.remove("hidden");
 
-    document
-        .getElementById("mentorBtn")
-        .classList.add("active");
 
-    document
-        .getElementById("heroTitle")
-        .innerText =
-        "Guide the Next Generation";
+document
+.getElementById("juniorBtn")
+.classList
+.remove("active");
 
-    document
-        .getElementById("heroText")
-        .innerText =
-        "Share your skills and help juniors grow.";
 
-    loadMentorRequests();
-    loadCertificates();
+document
+.getElementById("mentorBtn")
+.classList
+.add("active");
+
+
+document
+.getElementById("heroTitle")
+.innerText =
+"Guide the Next Generation";
+
+
+document
+.getElementById("heroText")
+.innerText =
+"Share your skills and help juniors grow.";
+
+
+loadMentorRequests();
+
+loadCertificates();
+
 }
 
 
-/* LOAD MENTORS */
+/* =========================
+   LOAD MENTORS
+========================= */
 
 async function loadMentors(){
 
-    try{
+try{
 
-        const response =
-            await fetch("/api/mentors");
+const response =
+await fetch("/api/mentors");
 
-        const mentors =
-            await response.json();
 
-        displayMentors(mentors);
+const mentors =
+await response.json();
 
-    }catch(error){
 
-        console.log(error);
+displayMentors(mentors);
 
-    }
+}
+
+catch(error){
+
+console.log(error);
+
+}
 
 }
 
 
-/* DISPLAY MENTORS */
+/* =========================
+   DISPLAY MENTORS
+========================= */
 
 function displayMentors(mentors){
 
-    const container =
-        document.getElementById("mentorCards");
+const container =
+document.getElementById(
+"mentorCards"
+);
 
-    container.innerHTML="";
 
-    mentors.forEach(mentor => {
+container.innerHTML="";
 
-        const card =
-            document.createElement("div");
 
-        card.className="card";
+mentors.forEach(mentor => {
 
-        const skillsHTML =
-            mentor.skills
-            .map(skill =>
-                `<span class="tag">${skill}</span>`
-            )
-            .join("");
 
-        card.innerHTML=`
+const card =
+document.createElement("div");
 
-            <div class="avatar">
-                👨‍💻
-            </div>
 
-            <h3>
-                ${mentor.name}
-            </h3>
+card.className="card";
 
-            <p>
-                ⭐ ${mentor.rating}
-            </p>
 
-            <div>
-                ${skillsHTML}
-            </div>
+const skillsHTML =
+mentor.skills
+.map(skill =>
+`<span class="tag">${skill}</span>`
+)
+.join("");
 
-            <p>
-                💼 ${mentor.experience}
-            </p>
 
-            <p>
-                ${mentor.available
-                    ? "🟢 Available"
-                    : "🔴 Unavailable"}
-            </p>
+card.innerHTML = `
 
-            <button
-                onclick="connect(${mentor.id})">
+<div class="avatar">
+👨‍💻
+</div>
 
-                🔗 Send Connection Request
+<h3>
+${mentor.name}
+</h3>
 
-            </button>
+<p>
+⭐ ${mentor.rating}
+</p>
 
-        `;
+<div>
+${skillsHTML}
+</div>
 
-        container.appendChild(card);
+<p>
+💼 ${mentor.experience}
+</p>
 
-    });
+<p>
+${mentor.available
+? "🟢 Available"
+: "🔴 Unavailable"}
+</p>
+
+
+<div class="match-score">
+
+Smart Match Score:
+<br>
+
+<strong>
+${mentor.match_score || 0}%
+</strong>
+
+</div>
+
+
+<button
+onclick="connect(${mentor.id})">
+
+🔗 Send Connection Request
+
+</button>
+
+`;
+
+
+container.appendChild(card);
+
+});
 
 }
 
 
-/* SEARCH */
+/* =========================
+   SEARCH
+========================= */
 
 async function searchMentors(){
 
-    const skill =
-        document
-        .getElementById("search")
-        .value;
+const skill =
+document
+.getElementById("search")
+.value;
 
-    if(skill.trim()===""){
 
-        loadMentors();
-        return;
+if(skill.trim()===""){
 
-    }
+loadMentors();
 
-    try{
-
-        const response =
-            await fetch(
-                "/api/mentors/search?skill="
-                +
-                encodeURIComponent(skill)
-            );
-
-        const mentors =
-            await response.json();
-
-        displayMentors(mentors);
-
-    }catch(error){
-
-        console.log(error);
-
-    }
+return;
 
 }
 
 
-/* CONNECT */
+try{
+
+const response =
+await fetch(
+"/api/mentors/search?skill="
++
+encodeURIComponent(skill)
+);
+
+
+const mentors =
+await response.json();
+
+
+displayMentors(mentors);
+
+}
+
+catch(error){
+
+console.log(error);
+
+}
+
+}
+
+
+/* =========================
+   CONNECT
+========================= */
 
 async function connect(id){
 
-    try{
+try{
 
-        const response =
-            await fetch(
-                "/api/connect",
-                {
-                    method:"POST",
+const response =
+await fetch(
+"/api/connect",
+{
 
-                    headers:{
-                        "Content-Type":
-                        "application/json"
-                    },
+method:"POST",
 
-                    body:JSON.stringify({
+headers:{
+"Content-Type":
+"application/json"
+},
 
-                        mentor_id:id,
+body:JSON.stringify({
 
-                        junior_name:
-                        "Anwesha Bhattacharjee"
+mentor_id:id,
 
-                    })
-                }
-            );
+junior_name:
+"Anwesha Bhattacharjee"
 
-        const result =
-            await response.json();
+})
 
-        document
-            .getElementById("message")
-            .innerText =
-            "✅ " + result.message;
+}
+);
 
-        loadJuniorRequests();
 
-    }catch(error){
+const result =
+await response.json();
 
-        console.log(error);
 
-    }
+document
+.getElementById("message")
+.innerText =
+"✅ " + result.message;
+
+
+loadJuniorRequests();
+
+}
+
+catch(error){
+
+console.log(error);
+
+}
 
 }
 
 
-/* JUNIOR REQUESTS */
+/* =========================
+   JUNIOR REQUESTS
+========================= */
 
 async function loadJuniorRequests(){
 
-    try{
+try{
 
-        const response =
-            await fetch("/api/requests");
+const response =
+await fetch("/api/requests");
 
-        const requests =
-            await response.json();
 
-        const container =
-            document.getElementById(
-                "juniorRequests"
-            );
+const requests =
+await response.json();
 
-        container.innerHTML="";
 
-        requests.forEach(req => {
+const container =
+document.getElementById(
+"juniorRequests"
+);
 
-            const div =
-                document.createElement("div");
 
-            div.className="request-card";
+container.innerHTML="";
 
-            div.innerHTML=`
 
-                <strong>
-                    👨‍🏫 ${req.mentor_name}
-                </strong>
+requests.forEach(req => {
 
-                <p>
-                    Connection request
-                </p>
 
-                <span class="status">
-                    ${req.status}
-                </span>
+const div =
+document.createElement("div");
 
-            `;
 
-            container.appendChild(div);
+div.className =
+"request-card";
 
-        });
 
-    }catch(error){
+div.innerHTML = `
 
-        console.log(error);
+<strong>
+👨‍🏫 ${req.mentor_name}
+</strong>
 
-    }
+<p>
+Connection request
+</p>
+
+<span class="status">
+${req.status}
+</span>
+
+`;
+
+
+container.appendChild(div);
+
+});
+
+}
+
+catch(error){
+
+console.log(error);
+
+}
 
 }
 
 
-/* MENTOR REQUESTS */
+/* =========================
+   MENTOR REQUESTS
+========================= */
 
 async function loadMentorRequests(){
 
-    try{
+try{
 
-        const response =
-            await fetch("/api/requests");
+const response =
+await fetch("/api/requests");
 
-        const requests =
-            await response.json();
 
-        const container =
-            document.getElementById(
-                "mentorRequests"
-            );
+const requests =
+await response.json();
 
-        container.innerHTML="";
 
-        requests.forEach(req => {
+const container =
+document.getElementById(
+"mentorRequests"
+);
 
-            const div =
-                document.createElement("div");
 
-            div.className="request-card";
+container.innerHTML="";
 
-            div.innerHTML=`
 
-                <strong>
-                    👨‍🎓 ${req.junior_name}
-                </strong>
+requests.forEach(req => {
 
-                <p>
-                    wants to learn from
-                    <strong>
-                        ${req.mentor_name}
-                    </strong>
-                </p>
 
-                <span class="status">
-                    ${req.status}
-                </span>
+const div =
+document.createElement("div");
 
-                ${
-                    req.status === "Pending"
-                    ?
-                    `
-                    <button
-                        class="accept"
-                        onclick="acceptRequest(${req.id})">
 
-                        ✅ Accept Request
+div.className =
+"request-card";
 
-                    </button>
-                    `
-                    :
-                    ""
-                }
 
-                ${
-                    req.status === "Accepted"
-                    ?
-                    `
-                    <button
-                        class="complete"
-                        onclick="completeSession(${req.id})">
+div.innerHTML = `
 
-                        🎓 Complete Session
+<strong>
+👨‍🎓 ${req.junior_name}
+</strong>
 
-                    </button>
-                    `
-                    :
-                    ""
-                }
+<p>
+wants to learn from
+<strong>
+${req.mentor_name}
+</strong>
+</p>
 
-            `;
+<span class="status">
+${req.status}
+</span>
 
-            container.appendChild(div);
 
-        });
+${
+req.status === "Pending"
 
-    }catch(error){
+?
 
-        console.log(error);
+`
+<button
+class="accept"
+onclick="acceptRequest(${req.id})">
 
-    }
+✅ Accept Request
+
+</button>
+`
+
+:
+
+""
 
 }
 
 
-/* ACCEPT */
+${
+req.status === "Accepted"
+
+?
+
+`
+<button
+class="complete"
+onclick="completeSession(${req.id})">
+
+🎓 Complete Session
+
+</button>
+`
+
+:
+
+""
+
+}
+
+`;
+
+
+container.appendChild(div);
+
+});
+
+}
+
+catch(error){
+
+console.log(error);
+
+}
+
+}
+
+
+/* =========================
+   ACCEPT REQUEST
+========================= */
 
 async function acceptRequest(id){
 
-    const response =
-        await fetch(
-            `/api/requests/${id}/accept`,
-            {
-                method:"POST"
-            }
-        );
+const response =
+await fetch(
+`/api/requests/${id}/accept`,
+{
+method:"POST"
+}
+);
 
-    const result =
-        await response.json();
 
-    alert("✅ " + result.message);
+const result =
+await response.json();
 
-    loadMentorRequests();
+
+alert(
+"✅ " +
+result.message
+);
+
+
+loadMentorRequests();
+
+loadJuniorRequests();
 
 }
 
 
-/* COMPLETE */
+/* =========================
+   COMPLETE SESSION
+========================= */
 
 async function completeSession(id){
 
-    const response =
-        await fetch(
-            `/api/requests/${id}/complete`,
-            {
-                method:"POST"
-            }
-        );
+const response =
+await fetch(
+`/api/requests/${id}/complete`,
+{
+method:"POST"
+}
+);
 
-    const result =
-        await response.json();
 
-    alert("🏆 " + result.message);
+const result =
+await response.json();
 
-    loadMentorRequests();
-    loadCertificates();
+
+alert(
+"🏆 " +
+result.message
+);
+
+
+loadMentorRequests();
+
+loadJuniorRequests();
+
+loadCertificates();
+
+loadProgress();
 
 }
 
 
-/* CERTIFICATES */
+/* =========================
+   CERTIFICATES
+========================= */
 
 async function loadCertificates(){
 
-    try{
+try{
 
-        const response =
-            await fetch(
-                "/api/certificates"
-            );
+const response =
+await fetch(
+"/api/certificates"
+);
 
-        const certificates =
-            await response.json();
 
-        const container =
-            document.getElementById(
-                "certificatesList"
-            );
+const certificates =
+await response.json();
 
-        container.innerHTML="";
 
-        certificates.forEach(cert => {
+const container =
+document.getElementById(
+"certificatesList"
+);
 
-            const div =
-                document.createElement("div");
 
-            div.className="certificate";
+container.innerHTML="";
 
-            div.innerHTML=`
 
-                <div class="certificate-university">
-                    TECHNO INDIA UNIVERSITY
-                </div>
+if(certificates.length === 0){
 
-                <div class="certificate-icon">
-                    🏆
-                </div>
+container.innerHTML =
+"No certificates yet.";
 
-                <h2>
-                    Mentor Contribution Certificate
-                </h2>
-
-                <p>
-                    This recognition is awarded to
-                </p>
-
-                <h3>
-                    ${cert.mentor_name}
-                </h3>
-
-                <p>
-                    for mentoring
-                    <strong>
-                        ${cert.junior_name}
-                    </strong>
-                </p>
-
-                <p style="margin-top:12px;">
-                    Skill:
-                    <strong>
-                        ${cert.skill}
-                    </strong>
-                </p>
-
-            `;
-
-            container.appendChild(div);
-
-        });
-
-    }catch(error){
-
-        console.log(error);
-
-    }
+return;
 
 }
 
 
-/* START */
+certificates.forEach(cert => {
+
+
+const div =
+document.createElement("div");
+
+
+div.className =
+"certificate";
+
+
+div.innerHTML = `
+
+<div class="certificate-university">
+
+TECHNO INDIA UNIVERSITY
+
+</div>
+
+<div class="certificate-icon">
+🏆
+</div>
+
+<h2>
+Mentor Contribution Certificate
+</h2>
+
+<p>
+This recognition is awarded to
+</p>
+
+<h3>
+${cert.mentor_name}
+</h3>
+
+<p>
+for mentoring
+<strong>
+${cert.junior_name}
+</strong>
+</p>
+
+<p style="margin-top:12px;">
+
+Skill:
+
+<strong>
+${cert.skill}
+</strong>
+
+</p>
+
+`;
+
+
+container.appendChild(div);
+
+});
+
+}
+
+catch(error){
+
+console.log(error);
+
+}
+
+}
+
+
+/* =========================
+   LEARNING PROGRESS
+========================= */
+
+async function loadProgress(){
+
+try{
+
+const response =
+await fetch(
+"/api/progress"
+);
+
+
+const progress =
+await response.json();
+
+
+console.log(
+"Learning Progress:",
+progress
+);
+
+}
+
+catch(error){
+
+console.log(error);
+
+}
+
+}
+
+
+/* =========================
+   DOUBT DESK
+========================= */
+
+async function postDoubt(){
+
+const input =
+document.getElementById(
+"doubtInput"
+);
+
+
+const message =
+document.getElementById(
+"doubtMessage"
+);
+
+
+const question =
+input.value.trim();
+
+
+if(question === ""){
+
+message.innerText =
+"⚠️ Please enter your doubt.";
+
+return;
+
+}
+
+
+try{
+
+const response =
+await fetch(
+"/api/doubts",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:JSON.stringify({
+
+question:question
+
+})
+
+}
+);
+
+
+const result =
+await response.json();
+
+
+if(result.success){
+
+message.innerText =
+"✅ Doubt posted successfully!";
+
+input.value="";
+
+}
+
+else{
+
+message.innerText =
+"⚠️ " +
+result.message;
+
+}
+
+}
+
+catch(error){
+
+console.log(error);
+
+message.innerText =
+"❌ Unable to post doubt.";
+
+}
+
+}
+
+
+/* =========================
+   START
+========================= */
 
 loadMentors();
+
 loadJuniorRequests();
+
 loadCertificates();
+
+loadProgress();
 
 </script>
 
 </body>
+
 </html>
